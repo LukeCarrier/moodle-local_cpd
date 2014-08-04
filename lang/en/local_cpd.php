@@ -16,6 +16,21 @@ defined('MOODLE_INTERNAL') || die;
 // Module metadata
 $string['pluginname'] = 'CPD';
 
+// Menu items and page titles
+$string['mycpd']   = 'My CPD';
+$string['cpdforx'] = '{$a}\'s CPD';
+
+// Table headings
+$string['activity']        = 'Activity';
+$string['activitytype']    = 'Activity Type';
+$string['developmentneed'] = 'Development Need';
+$string['datedue']         = 'Due Date';
+$string['dateend']         = 'End Date';
+$string['objective']       = 'Objective';
+$string['datestart']       = 'Start Date';
+$string['status']          = 'Status';
+$string['timetaken']       = 'Time Taken';
+
 // Model exceptions
 $string['model:nosuchmethod']             = 'Attempt to call nonexistent method "$a"';
 $string['model:incompleteimplementation'] = 'Attempt to use model "$a" which is incomplete';
