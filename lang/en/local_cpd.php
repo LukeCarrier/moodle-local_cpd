@@ -15,3 +15,7 @@ defined('MOODLE_INTERNAL') || die;
 
 // Module metadata
 $string['pluginname'] = 'CPD';
+
+// Model exceptions
+$string['model:nosuchmethod']             = 'Attempt to call nonexistent method "$a"';
+$string['model:incompleteimplementation'] = 'Attempt to use model "$a" which is incomplete';
