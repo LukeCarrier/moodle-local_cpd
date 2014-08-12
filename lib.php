@@ -25,5 +25,5 @@ function local_cpd_extends_navigation(global_navigation $navroot) {
                              new moodle_url('/local/cpd/index.php'),
                              navigation_node::NODETYPE_LEAF,
                              get_string('cpd', 'report_cpd'),
-                             'reportcpd');
+                             'local_cpd-mycpd');
 }

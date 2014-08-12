@@ -1,0 +1,15 @@
+.path-local-cpd .cpd-add-box {
+    border: 1px solid #bbb;
+    border-radius: 0;
+    min-height: 30px; /* accomodate the single button's height */
+    line-height: 30px;
+    padding: 5px;
+}
+
+.path-local-cpd .cpd-add-box .cpd-why-log {
+    float: left;
+}
+
+.path-local-cpd .cpd-add-box .singlebutton {
+    float: right;
+}

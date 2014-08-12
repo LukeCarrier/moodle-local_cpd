@@ -17,10 +17,11 @@ defined('MOODLE_INTERNAL') || die;
 $string['pluginname'] = 'CPD';
 
 // Menu items and page titles
-$string['mycpd']   = 'My CPD';
-$string['cpdforx'] = '{$a}\'s CPD';
+$string['cpdforx']   = '{$a}\'s CPD';
+$string['deletingx'] = 'Deleting "{$a}"';
+$string['mycpd']     = 'My CPD';
 
-// Table headings
+// Table
 $string['activity']        = 'Activity';
 $string['activitytype']    = 'Activity Type';
 $string['developmentneed'] = 'Development Need';
@@ -30,7 +31,19 @@ $string['objective']       = 'Objective';
 $string['datestart']       = 'Start Date';
 $string['status']          = 'Status';
 $string['timetaken']       = 'Time Taken';
+$string['nocpdactivities'] = 'There are no activities to display.';
+
+// Add activity
+$string['whylogactivity'] = 'Please ensure your CPD activity log is up to date by logging your CPD activities.';
+$string['logactivity']    = 'Log CPD activity';
+
+// Confirmation prompts
+$string['confirmdeleteofx'] = 'Are you sure you wish to delete "{$a}"?';
+
+// Access capabilities
+$string['cpd:edituserreport'] = 'Edit a user\'s CPD report';
+$string['cpd:viewuserreport'] = 'View a user\'s CPD report';
 
 // Model exceptions
 $string['model:nosuchmethod']             = 'Attempt to call nonexistent method "$a"';
-$string['model:incompleteimplementation'] = 'Attempt to use model "$a" which is incomplete';
+$string['model:incompleteimplementation'] = 'Attempt to use model "{$a}" which is incomplete';

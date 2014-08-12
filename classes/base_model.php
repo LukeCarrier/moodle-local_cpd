@@ -80,6 +80,37 @@ abstract class base_model {
     }
 
     /**
+     * Return all records in the table.
+     *
+     * @return \local_cpd\base_model[] An array of model objects representing
+     *                                 the records in the table.
+     */
+    final public static function all() {
+        global $DB;
+
+        $records = $DB->get_records(static::model_table());
+
+        foreach ($records as $id => $record) {
+            $records[$id] = static::model_from_dml($record);
+        }
+
+        return $records;
+    }
+
+    /**
+     * Delete a record and all of its children.
+     *
+     * @return void
+     */
+    public function delete() {
+        global $DB;
+
+        $DB->delete_records(static::model_table(), array(
+            'id' => $this->id,
+        ));
+    }
+
+    /**
      * Find objects matching the given criteria.
      *
      * @param mixed  $criteria The criteria with which to populate a WHERE

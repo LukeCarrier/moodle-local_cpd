@@ -12,6 +12,7 @@
  */
 
 use local_cpd\activity;
+use local_cpd\activity_type;
 use local_cpd\util;
 
 require_once dirname(dirname(__DIR__)) . '/config.php';
@@ -24,12 +25,18 @@ $userid = optional_param('userid', $USER->id, PARAM_INT);
 $context = context_user::instance($userid);
 require_capability('local/cpd:viewuserreport', $context);
 
+$deleteurl = new moodle_url('/local/cpd/delete.php');
+$editurl   = new moodle_url('/local/cpd/edit.php');
+$listurl   = new moodle_url('/local/cpd/index.php');
+
 $titlestr = ($USER->id == $userid)
         ? util::string('mycpd') : util::string('cpdforx', fullname($USER));
 
 $PAGE->set_context($context);
 $PAGE->set_title($titlestr);
-$PAGE->set_url(new moodle_url('/local/cpd/index.php'));
+$PAGE->set_url($listurl);
+
+$PAGE->requires->css(new moodle_url('/local/cpd/style.css'));
 
 $renderer = $PAGE->get_renderer('local_cpd');
 
@@ -38,5 +45,6 @@ $activities = activity::find_by_userid($userid);
 echo
         $OUTPUT->header(),
         $OUTPUT->heading($titlestr),
-        $renderer->cpd_activity_table($activities),
+        $renderer->cpd_activity_table($activities, $editurl, $deleteurl),
+        $renderer->cpd_activity_add($editurl),
         $OUTPUT->footer();
