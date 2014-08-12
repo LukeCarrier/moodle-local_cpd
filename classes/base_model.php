@@ -111,7 +111,8 @@ abstract class base_model {
     final public static function get($criteria) {
         global $DB;
 
-        $record = $DB->get_record(static::model_table(), $criteria);
+        $record = $DB->get_record(static::model_table(), $criteria, '*',
+                                  MUST_EXIST);
 
         return static::model_from_dml($record);
     }
