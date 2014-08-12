@@ -15,6 +15,8 @@ namespace local_cpd;
 
 use lang_string;
 
+defined('MOODLE_INTERNAL') || die;
+
 class util {
     /**
      * What is the module's name?

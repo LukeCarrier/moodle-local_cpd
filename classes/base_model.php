@@ -17,6 +17,8 @@ use stdClass;
 
 use moodle_exception;
 
+defined('MOODLE_INTERNAL') || die;
+
 /**
  * Base model.
  *

@@ -13,6 +13,8 @@
 
 namespace local_cpd;
 
+defined('MOODLE_INTERNAL') || die;
+
 /**
  * CPD activity.
  *

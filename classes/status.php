@@ -13,6 +13,8 @@
 
 namespace local_cpd;
 
+defined('MOODLE_INTERNAL') || die;
+
 class status extends base_model {
     /**
      * Record ID.
