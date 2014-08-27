@@ -23,6 +23,7 @@ require_login(); // $USER might not be set
 $userid = optional_param('userid', $USER->id, PARAM_INT);
 
 $isowncpd = $userid === $USER->id;
+$user     = $isowncpd ? $USER : core_user::get_user($userid);
 
 $context = context_user::instance($userid);
 require_capability('local/cpd:viewuserreport', $context);
@@ -34,7 +35,7 @@ $listurl   = new moodle_url('/local/cpd/index.php');
 if ($isowncpd) {
     $titlestr = util::string('mycpd');
 } else {
-    $titlestr = util::string('cpdforx', fullname($USER));
+    $titlestr = util::string('cpdforx', fullname($user));
     $editurl->param('userid', $userid);
 }
 
