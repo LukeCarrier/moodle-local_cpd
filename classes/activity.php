@@ -44,11 +44,25 @@ class activity extends base_model {
     protected $objective;
 
     /**
+     * Activity objective format.
+     *
+     * @var integer
+     */
+    protected $objective_fmt;
+
+    /**
      * Identified development need.
      *
      * @var string
      */
     protected $development_need;
+
+    /**
+     * Identified development need format.
+     *
+     * @var integer
+     */
+    protected $development_need_fmt;
 
     /**
      * Activity type ID.
@@ -63,6 +77,13 @@ class activity extends base_model {
      * @var string
      */
     protected $activity;
+
+    /**
+     * Activity description.
+     *
+     * @var integer
+     */
+    protected $activity_fmt;
 
     /**
      * Due date (timestamp).
@@ -111,9 +132,12 @@ class activity extends base_model {
      *
      * @param integer $userid
      * @param string  $objective
+     * @param integer $objective_fmt
      * @param string  $development_need
+     * @param integer $development_need_fmt
      * @param integer $activitytypeid
      * @param string  $activity
+     * @param integer $activity_fmt
      * @param integer $duedate
      * @param integer $enddate
      * @param integer $statusid
@@ -121,20 +145,51 @@ class activity extends base_model {
      * @param integer $timetaken
      */
     final public function __construct($userid=null, $objective=null,
-            $development_need=null, $activitytypeid=null, $activity=null,
-            $duedate=null, $startdate=null, $enddate=null, $statusid=null,
-            $cpdyearid=null, $timetaken=null) {
-        $this->userid           = $userid;
-        $this->objective        = $objective;
-        $this->development_need = $development_need;
-        $this->activitytypeid   = $activitytypeid;
-        $this->activity         = $activity;
-        $this->duedate          = $duedate;
-        $this->startdate        = $startdate;
-        $this->enddate          = $enddate;
-        $this->statusid         = $statusid;
-        $this->cpdyearid        = $cpdyearid;
-        $this->timetaken        = $timetaken ; 
+            $objective_fmt=null, $development_need=null,
+            $development_need_fmt=null, $activitytypeid=null, $activity=null,
+            $activity_format=null, $duedate=null, $startdate=null,
+            $enddate=null, $statusid=null, $cpdyearid=null, $timetaken=null) {
+        $this->userid               = $userid;
+        $this->objective            = $objective;
+        $this->objective_fmt        = $objective_fmt;
+        $this->development_need     = $development_need;
+        $this->development_need_fmt = $development_need_fmt;
+        $this->activitytypeid       = $activitytypeid;
+        $this->activity             = $activity;
+        $this->activity_fmt         = $activity_format;
+        $this->duedate              = $duedate;
+        $this->startdate            = $startdate;
+        $this->enddate              = $enddate;
+        $this->statusid             = $statusid;
+        $this->cpdyearid            = $cpdyearid;
+        $this->timetaken            = $timetaken ; 
+    }
+
+    /**
+     * Get formatted activity name.
+     *
+     * @return string The formatted activity name.
+     */
+    public function get_activity_text() {
+        return format_text($this->activity, $this->activity_fmt);
+    }
+
+    /**
+     * Get formatted development need.
+     *
+     * @return string The formatted development need.
+     */
+    public function get_development_need_text() {
+        return format_text($this->development_need, $this->development_need_fmt);
+    }
+
+    /**
+     * Get formatted objective.
+     *
+     * @return string The formatted objective.
+     */
+    public function get_objective_text() {
+        return format_text($this->objective, $this->objective_fmt);
     }
 
     /**
@@ -178,14 +233,39 @@ class activity extends base_model {
     /**
      * @override \local_cpd\base_model
      */
+    final public function model_to_form() {
+        $formdata = parent::model_to_form();
+
+        foreach (array('activity', 'development_need', 'objective') as $field) {
+            $formdata->{$field} = (object) array(
+                'format' => $this->{"{$field}_fmt"},
+                'text'   => $this->{$field},
+            );
+        }
+
+        /* XXX: the duration form element in Moodle forms is pretty bad at
+         *      discerning an appropriate unit of time to represent this value */
+        $formdata->timetaken = $this->get_timetaken_seconds();
+
+        var_dump($formdata);
+
+        return $formdata;
+    }
+
+    /**
+     * @override \local_cpd\base_model
+     */
     final protected static function model_fields() {
         return array(
             'id',
             'userid',
             'objective',
+            'objective_fmt',
             'development_need',
+            'development_need_fmt',
             'activitytypeid',
             'activity',
+            'activity_fmt',
             'duedate',
             'startdate',
             'enddate',

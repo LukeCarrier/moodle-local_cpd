@@ -11,12 +11,18 @@
                        NOTNULL="true" UNSIGNED="true" SEQUENCE="false" />
                 <FIELD NAME="objective" TYPE="text" LENGTH="big"
                        NOTNULL="false" SEQUENCE="false" />
+                <FIELD NAME="objective_fmt" TYPE="int" LENGTH="10"
+                       NOTNULL="true" UNSIGNED="true" SEQUENCE="true" />
                 <FIELD NAME="development_need" TYPE="text" LENGTH="big"
                        NOTNULL="false" SEQUENCE="false" />
+                <FIELD NAME="development_need_fmt" TYPE="int" LENGTH="10"
+                       NOTNULL="true" UNSIGNED="true" SEQUENCE="true" />
                 <FIELD NAME="activitytypeid" TYPE="int" LENGTH="10"
                        NOTNULL="false" UNSIGNED="true" SEQUENCE="false" />
                 <FIELD NAME="activity" TYPE="text" LENGTH="big"
                        NOTNULL="false" SEQUENCE="false" />
+                <FIELD NAME="activity_fmt" TYPE="int" LENGTH="10"
+                       NOTNULL="true" UNSIGNED="true" SEQUENCE="true" />
                 <FIELD NAME="duedate" TYPE="int" LENGTH="10"
                        NOTNULL="false" UNSIGNED="true" SEQUENCE="false" />
                 <FIELD NAME="startdate" TYPE="int" LENGTH="10"
