@@ -41,7 +41,7 @@ class activity_type extends base_model {
      *
      * @param string $name The name of the activity.
      */
-    final public function __construct($name) {
+    final public function __construct($name=null) {
         $this->name = $name;
     }
 
