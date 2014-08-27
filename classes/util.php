@@ -32,11 +32,14 @@ class util {
      * @param stdClass|string $a      An object or string containing
      *                                substitions to be made to the string's
      *                                value.
+     * @param string          $module If retrieving a string from another Moodle
+     *                                module, the name of the module.
      *
      * @return \lang_string The language string object.
      */
-    public static function string($string, $a=null) {
-        return new lang_string($string, static::MOODLE_MODULE, $a);
+    public static function string($string, $a=null, $module=null) {
+        $module = $module ?: static::MOODLE_MODULE;
+        return new lang_string($string, $module, $a);
     }
 
     /**
@@ -49,10 +52,13 @@ class util {
      * @param stdClass|string $a      An object or string containing
      *                                substitions to be made to the string's
      *                                value.
+     * @param string          $module If retrieving a string from another Moodle
+     *                                module, the name of the module.
      *
      * @return string The language string.
      */
-    public static function real_string($string, $a=null) {
+    public static function real_string($string, $a=null, $module=null) {
+        $module = $module ?: static::MOODLE_MODULE;
         return get_string($string, static::MOODLE_MODULE, $a);
     }
 
