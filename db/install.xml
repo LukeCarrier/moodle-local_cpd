@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <XMLDB PATH="local/cpd/db" VERSION="20100128" COMMENT="XMLDB file for Moodle local/cpd"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:noNamespaceSchemaLocation="../../../../lib/xmldb/xmldb.xsd">
+       xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd">
     <TABLES>
         <TABLE NAME="cpd" COMMENT="Defines CPD activities">
             <FIELDS>
