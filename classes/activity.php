@@ -138,6 +138,16 @@ class activity extends base_model {
     }
 
     /**
+     * Get time taken value in seconds.
+     *
+     * Most date functions depend on this, but for some reason report_cpd stores
+     * a minute value.
+     */
+    public function get_timetaken_seconds() {
+        return $this->timetaken * MINSECS;
+    }
+
+    /**
      * @override \local_cpd\base_model
      */
     final protected static function model_accessors() {

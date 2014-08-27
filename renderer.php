@@ -81,11 +81,11 @@ class local_cpd_renderer extends plugin_renderer_base {
                 $activity->development_need,
                 $activitytype->name,
                 $activity->activity,
-                $activity->duedate,
-                $activity->startdate,
-                $activity->enddate,
+                userdate($activity->duedate,   util::string('strftimedate', null, 'langconfig')),
+                userdate($activity->startdate, util::string('strftimedate', null, 'langconfig')),
+                userdate($activity->enddate,   util::string('strftimedate', null, 'langconfig')),
                 $activitystatus->name,
-                $activity->timetaken,
+                format_time($activity->get_timetaken_seconds()),
                 $actionbuttons,
             );
         }
