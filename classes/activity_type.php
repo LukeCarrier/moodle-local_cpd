@@ -37,6 +37,31 @@ class activity_type extends base_model {
     protected $name;
 
     /**
+     * Initialiser.
+     *
+     * @param string $name The name of the activity.
+     */
+    final public function __construct($name) {
+        $this->name = $name;
+    }
+
+    /**
+     * Retrieve a menu of activity types.
+     *
+     * @return string[]
+     */
+    final public static function menu() {
+        $activitytypes = static::all();
+        $menu          = array();
+
+        foreach ($activitytypes as $activitytype) {
+            $menu[$activitytype->id] = $activitytype->name;
+        }
+
+        return $menu;
+    }
+
+    /**
      * @override \local_cpd\base_model
      */
     final protected static function model_accessors() {

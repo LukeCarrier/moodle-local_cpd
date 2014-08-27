@@ -107,6 +107,37 @@ class activity extends base_model {
     protected $timetaken;
 
     /**
+     * Initialiser.
+     *
+     * @param integer $userid
+     * @param string  $objective
+     * @param string  $development_need
+     * @param integer $activitytypeid
+     * @param string  $activity
+     * @param integer $duedate
+     * @param integer $enddate
+     * @param integer $statusid
+     * @param integer $cpdyearid
+     * @param integer $timetaken
+     */
+    final public function __construct($userid=null, $objective=null,
+            $development_need=null, $activitytypeid=null, $activity=null,
+            $duedate=null, $startdate=null, $enddate=null, $statusid=null,
+            $cpdyearid=null, $timetaken=null) {
+        $this->userid           = $userid;
+        $this->objective        = $objective;
+        $this->development_need = $development_need;
+        $this->activitytypeid   = $activitytypeid;
+        $this->activity         = $activity;
+        $this->duedate          = $duedate;
+        $this->startdate        = $startdate;
+        $this->enddate          = $enddate;
+        $this->statusid         = $statusid;
+        $this->cpdyearid        = $cpdyearid;
+        $this->timetaken        = $timetaken ; 
+    }
+
+    /**
      * @override \local_cpd\base_model
      */
     final protected static function model_accessors() {
