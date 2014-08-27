@@ -85,10 +85,10 @@ abstract class base_model {
      * @return \local_cpd\base_model[] An array of model objects representing
      *                                 the records in the table.
      */
-    final public static function all() {
+    final public static function all($sort=null) {
         global $DB;
 
-        $records = $DB->get_records(static::model_table());
+        $records = $DB->get_records(static::model_table(), null, $sort);
 
         foreach ($records as $id => $record) {
             $records[$id] = static::model_from_dml($record);
