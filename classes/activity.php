@@ -23,6 +23,17 @@ defined('MOODLE_INTERNAL') || die;
  */
 class activity extends base_model {
     /**
+     * Editor fields.
+     *
+     * @var string[]
+     */
+    protected static $editorfields = array(
+        'activity',
+        'development_need',
+        'objective',
+    );
+
+    /**
      * Record ID.
      *
      * @var integer
@@ -233,11 +244,25 @@ class activity extends base_model {
     /**
      * @override \local_cpd\base_model
      */
+    final public static function model_from_form($data) {
+        return new static($data->userid, $data->objective['text'],
+                          $data->objective['format'],
+                          $data->development_need['text'],
+                          $data->development_need['format'],
+                          $data->activitytypeid, $data->activity['text'],
+                          $data->activity['format'], $data->duedate,
+                          $data->startdate, $data->enddate,
+                          $data->status, $data->cpdyearid, $data->timetaken);
+    }
+
+    /**
+     * @override \local_cpd\base_model
+     */
     final public function model_to_form() {
         $formdata = parent::model_to_form();
 
-        foreach (array('activity', 'development_need', 'objective') as $field) {
-            $formdata->{$field} = (object) array(
+        foreach (static::$editorfields as $field) {
+            $formdata->{$field} = array(
                 'format' => $this->{"{$field}_fmt"},
                 'text'   => $this->{$field},
             );

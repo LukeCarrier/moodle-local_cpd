@@ -210,6 +210,21 @@ abstract class base_model {
     }
 
     /**
+     * Populate a model from values obtained from a Moodle form.
+     *
+     * This method *MUST* be overridden in your in your child class if you
+     * intend to use it.
+     *
+     * @param \stdClass $data A data object from moodleform::get_data().
+     *
+     * @return \local_cpd\base_model A model object.
+     */
+    public static function model_from_form($data) {
+        throw new moodle_exception('model:incompleteimplementation',
+                                   'local_cpd');
+    }
+
+    /**
      * Populate a model object from a DML record.
      *
      * @param stdClass $record The DML record object.
@@ -220,6 +235,20 @@ abstract class base_model {
         foreach (static::model_fields() as $field) {
             $this->{$field} = $record->{$field};
         }
+    }
+
+    /**
+     * Primary key field.
+     *
+     * Moodle expects the first field fetched in any DML query to contain a
+     * row-unique value, as it uses this field's value in any resulting arrays.
+     *
+     * You probably shouldn't override this.
+     *
+     * @return string The name of the table's primary key.
+     */
+    public static function model_primary_key() {
+        return 'id';
     }
 
     /**
@@ -256,6 +285,16 @@ abstract class base_model {
     }
 
     /**
+     * model_to_dml(), but for moodleforms.
+     *
+     * @return stdClass An object containing the moodleform values. Pass this to
+     *                  set_data().
+     */
+    public function model_to_form() {
+        return $this->model_to_dml();
+    }
+
+    /**
      * Retrieve the name of the underlying table within the Moodle database.
      *
      * @return string The name of the table.
@@ -265,5 +304,23 @@ abstract class base_model {
     protected static function model_table() {
         throw new moodle_exception('model:incompleteimplementation',
                                    'local_cpd');
+    }
+
+    /**
+     * Save amendments to or a new record for the model.
+     *
+     * @return void
+     */
+    public function save() {
+        global $DB;
+
+        $primarykey = static::model_primary_key();
+        $record     = $this->model_to_dml();
+        if ($this->{$primarykey} !== null) {
+            $DB->update_record(static::model_table(), $record);
+        } else {
+            $this->{$primarykey} = $DB->insert_record(static::model_table(),
+                                                      $record);
+        }
     }
 }
