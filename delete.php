@@ -18,7 +18,7 @@ require_once dirname(dirname(__DIR__)) . '/config.php';
 
 $id = required_param('id', PARAM_INT);
 
-$context  = context_user::instance($activity->userid);
+$context = context_user::instance($activity->userid);
 require_login();
 require_capability('local/cpd:edituserreport', $context);
 
@@ -37,7 +37,6 @@ $PAGE->set_url($deleteurl);
 
 $PAGE->navigation->find('local_cpd-mycpd')->make_active();
 $PAGE->navbar->add($titlestr);
-
 
 if (confirm_sesskey()) {
     $activity->delete();

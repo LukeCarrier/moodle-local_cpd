@@ -22,6 +22,8 @@ require_once __DIR__ . '/lib.php';
 require_login(); // $USER might not be set
 $userid = optional_param('userid', $USER->id, PARAM_INT);
 
+$isowncpd = $userid === $USER->id;
+
 $context = context_user::instance($userid);
 require_capability('local/cpd:viewuserreport', $context);
 
@@ -29,8 +31,12 @@ $deleteurl = new moodle_url('/local/cpd/delete.php');
 $editurl   = new moodle_url('/local/cpd/edit.php');
 $listurl   = new moodle_url('/local/cpd/index.php');
 
-$titlestr = ($USER->id == $userid)
-        ? util::string('mycpd') : util::string('cpdforx', fullname($USER));
+if ($isowncpd) {
+    $titlestr = util::string('mycpd');
+} else {
+    $titlestr = util::string('cpdforx', fullname($USER));
+    $editurl->param('userid', $userid);
+}
 
 $PAGE->set_context($context);
 $PAGE->set_title($titlestr);

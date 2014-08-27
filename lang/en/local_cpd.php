@@ -17,8 +17,10 @@ defined('MOODLE_INTERNAL') || die;
 $string['pluginname'] = 'CPD';
 
 // Menu items and page titles
+$string['logging']   = 'Logging CPD activity';
 $string['cpdforx']   = '{$a}\'s CPD';
 $string['deletingx'] = 'Deleting "{$a}"';
+$string['editingx']  = 'Editing "{$a}"';
 $string['mycpd']     = 'My CPD';
 
 // Table
@@ -33,7 +35,7 @@ $string['status']          = 'Status';
 $string['timetaken']       = 'Time Taken';
 $string['nocpdactivities'] = 'There are no activities to display.';
 
-// Add activity
+// Add activity section of list
 $string['whylogactivity'] = 'Please ensure your CPD activity log is up to date by logging your CPD activities.';
 $string['logactivity']    = 'Log CPD activity';
 
