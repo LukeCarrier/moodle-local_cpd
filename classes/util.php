@@ -63,6 +63,28 @@ class util {
     }
 
     /**
+     * Reduce a collection of model objects down to a single field.
+     *
+     * In the absence of a collection object to wrap sets of models, this is the
+     * best we can do for now.
+     *
+     * @param stdClass[] $collection An array of objects.
+     * @param string     $field      An individual field to retain.
+     *
+     * @return mixed[] An array containing the value of the specified field on
+     *                 each object.
+     */
+    public static function reduce($collection, $field) {
+        $result = array();
+
+        foreach ($collection as $item) {
+            $result[] = $item->{$field};
+        }
+
+        return $result;
+    }
+
+    /**
      * Does the string start with the substring?
      *
      * @param string $string    The larger of the two strings.
