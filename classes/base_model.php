@@ -124,11 +124,28 @@ abstract class base_model {
         $records = $DB->get_records(static::model_table(), $criteria);
         $records = is_array($records) ? $records : array(); // 0 records = false
 
-        foreach ($records as $id => $record) {
-            $records[$id] = static::model_from_dml($record);
-        }
+        return static::model_from_many_dml($records);
+    }
 
-        return $records;
+    /**
+     * Find objects the given complex criteria.
+     *
+     * This method is like base_model::find(), except that it allows you to use
+     * SQL operators in your query.
+     *
+     * @param string  $select A parameterised SQL string.
+     * @param mixed[] $params Parameters to substitute into the query.
+     *
+     * @return base_model An array of objects, all subclasses of base_model.
+     */
+    final public static function find_select($select, $params) {
+        global $DB;
+
+        $records = $DB->get_records_select(static::model_table(), $select,
+                                           $params);
+        $records = is_array($records) ? $records : array(); // 0 records = false
+
+        return static::model_from_many_dml($records);
     }
 
     /**
@@ -137,13 +154,33 @@ abstract class base_model {
      * @param mixed $criteria The criteria with which to populate a WHERE
      *                        clause.
      *
-     * @return base_model An array of objects, all subclasses of base_model.
+     * @return base_model An individual model object.
      */
     final public static function get($criteria) {
         global $DB;
 
         $record = $DB->get_record(static::model_table(), $criteria, '*',
                                   MUST_EXIST);
+
+        return static::model_from_dml($record);
+    }
+
+    /**
+     * Get a single object from a complex match.
+     *
+     * This method is like base_model::get(), except that it allows you to use
+     * SQL operators in your query.
+     *
+     * @param string  $select A parameterised SQL string.
+     * @param mixed[] $params Parameters to substitute into the query.
+     *
+     * @return base_model An individual model object.
+     */
+    final public static function get_select($select, $params) {
+        global $DB;
+
+        $record = $DB->get_record_select(static::model_table(), $select,
+                                         $params, '*', MUST_EXIST);
 
         return static::model_from_dml($record);
     }
@@ -207,6 +244,21 @@ abstract class base_model {
         $model->model_populate($record);
 
         return $model;
+    }
+
+    /**
+     * Given an array of DML records, assemble model objects from all of them.
+     *
+     * @param stdClass[] $records An array of DML record objects.
+     *
+     * @return base_model[] An array of model objects.
+     */
+    final public static function model_from_many_dml($records) {
+        foreach ($records as $id => $record) {
+            $records[$id] = static::model_from_dml($record);
+        }
+
+        return $records;
     }
 
     /**
