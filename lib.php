@@ -21,11 +21,26 @@ defined('MOODLE_INTERNAL') || die;
  * @return void
  */
 function local_cpd_extends_navigation(global_navigation $navroot) {
-    $navprof = $navroot->find('myprofile', navigation_node::TYPE_ROOTNODE);
+    $cpdurl = new moodle_url('/local/cpd/index.php');
 
-    $navnode = $navprof->add(util::string('mycpd'),
-                             new moodle_url('/local/cpd/index.php'),
-                             navigation_node::NODETYPE_LEAF,
-                             util::string('mycpd'),
-                             'local_cpd-mycpd');
+    $navmy = $navroot->find('myprofile', navigation_node::TYPE_ROOTNODE);
+    $navmy->add(util::string('mycpd'), $cpdurl,
+                navigation_node::NODETYPE_LEAF, util::string('mycpd'),
+                'local_cpd-my');
+
+    // 2nd elem in this set:
+    $navusers = $navroot->find_all_of_type(navigation_node::TYPE_USER);
+    foreach ($navusers as $navuser) {
+        if ($navuser->key !== 'myprofile') {
+            $context = context_user::instance($navuser->key);
+            if (!has_capability('local/cpd:viewuserreport', $context)) {
+                continue;
+            }
+
+            $cpdurl->param('userid', $navuser->key);
+            $navuser->add(util::string('cpd'), $cpdurl,
+                          navigation_node::NODETYPE_LEAF, util::string('cpd'),
+                          "local_cpd-{$navuser->key}");
+        }
+    }
 }

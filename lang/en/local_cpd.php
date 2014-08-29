@@ -22,6 +22,7 @@ $string['cpdforx']   = '{$a}\'s CPD';
 $string['deletingx'] = 'Deleting "{$a}"';
 $string['editingx']  = 'Editing "{$a}"';
 $string['mycpd']     = 'My CPD';
+$string['cpd']       = 'CPD';
 
 // Table
 $string['activity']        = 'Activity';
