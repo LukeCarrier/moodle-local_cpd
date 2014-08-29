@@ -13,7 +13,9 @@
 
 use local_cpd\activity;
 use local_cpd\activity_type;
+use local_cpd\activity_filter_form;
 use local_cpd\util;
+use local_cpd\year;
 
 require_once dirname(dirname(__DIR__)) . '/config.php';
 
@@ -43,15 +45,43 @@ $PAGE->set_context($context);
 $PAGE->set_title($titlestr);
 $PAGE->set_url($listurl);
 
+$filterform = new activity_filter_form(null, null, 'get');
+$filterform->set_data(array('userid' => $user->id));
+
 $PAGE->requires->css(new moodle_url('/local/cpd/style.css'));
 
 $renderer = $PAGE->get_renderer('local_cpd');
 
+if ($filters = $filterform->get_data()) {
+    if ($filters->filteryearstartdate || $filters->filteryearenddate) {
+        $years = year::find_between($filters->filteryearstartdate,
+                                    $filters->filteryearenddate);
+    } elseif (!empty($filters->filteryearids)) {
+        $years = array();
+        foreach ($filters->filteryearids as $id) {
+            $years[] = year::get_by_id($id);
+        }
+    } else {
+        $years = year::all();
+    }
+} else {
+    $years = year::all();
+}
 
-$activities = activity::find_by_userid($user->id);
+if (count($years)) {
+    $yearids = util::reduce($years, 'id');
+    list($sql, $params) = $DB->get_in_or_equal($yearids);
+    $params[] = $user->id;
+    $activities = activity::find_select("cpdyearid {$sql} AND userid = ?", $params);
+} else {
+    $activities = array();
+}
+
 echo
         $OUTPUT->header(),
-        $OUTPUT->heading($titlestr),
+        $OUTPUT->heading($titlestr);
+$filterform->display();
+echo
         $renderer->cpd_activity_table($activities, $editurl, $deleteurl),
         $renderer->cpd_activity_add($editurl),
         $OUTPUT->footer();

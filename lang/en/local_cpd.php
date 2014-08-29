@@ -24,7 +24,7 @@ $string['editingx']  = 'Editing "{$a}"';
 $string['mycpd']     = 'My CPD';
 $string['cpd']       = 'CPD';
 
-// Table
+// Ativity table
 $string['activity']        = 'Activity';
 $string['activitytype']    = 'Activity Type';
 $string['developmentneed'] = 'Development Need';
@@ -35,6 +35,11 @@ $string['datestart']       = 'Start Date';
 $string['status']          = 'Status';
 $string['timetaken']       = 'Time Taken';
 $string['nocpdactivities'] = 'There are no activities to display.';
+
+// Year filter table
+$string['filterby']      = 'Filter by';
+$string['year']          = 'CPD year';
+$string['yeardaterange'] = '{$a->startdate} - {$a->enddate}';
 
 // Add activity section of list
 $string['whylogactivity'] = 'Please ensure your CPD activity log is up to date by logging your CPD activities.';
