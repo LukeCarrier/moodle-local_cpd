@@ -272,8 +272,6 @@ class activity extends base_model {
          *      discerning an appropriate unit of time to represent this value */
         $formdata->timetaken = $this->get_timetaken_seconds();
 
-        var_dump($formdata);
-
         return $formdata;
     }
 
