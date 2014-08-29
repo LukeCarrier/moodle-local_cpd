@@ -25,7 +25,7 @@ $userid = optional_param('userid', $USER->id, PARAM_INT);
 $isowncpd = $userid === $USER->id;
 $user     = $isowncpd ? $USER : core_user::get_user($userid);
 
-$context = context_user::instance($userid);
+$context = context_user::instance($user->id);
 require_capability('local/cpd:viewuserreport', $context);
 
 $deleteurl = new moodle_url('/local/cpd/delete.php');
@@ -36,7 +36,7 @@ if ($isowncpd) {
     $titlestr = util::string('mycpd');
 } else {
     $titlestr = util::string('cpdforx', fullname($user));
-    $editurl->param('userid', $userid);
+    $editurl->param('userid', $user->id);
 }
 
 $PAGE->set_context($context);
@@ -47,8 +47,8 @@ $PAGE->requires->css(new moodle_url('/local/cpd/style.css'));
 
 $renderer = $PAGE->get_renderer('local_cpd');
 
-$activities = activity::find_by_userid($userid);
 
+$activities = activity::find_by_userid($user->id);
 echo
         $OUTPUT->header(),
         $OUTPUT->heading($titlestr),
