@@ -113,8 +113,8 @@ abstract class base_model {
     /**
      * Find objects matching the given criteria.
      *
-     * @param mixed  $criteria The criteria with which to populate a WHERE
-     *                         clause.
+     * @param mixed $criteria The criteria with which to populate a WHERE
+     *                        clause.
      *
      * @return base_model[] An array of objects, all subclasses of base_model.
      */
