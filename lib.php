@@ -11,6 +11,8 @@
  * @license GPL v3
  */
 
+use local_cpd\util;
+
 defined('MOODLE_INTERNAL') || die;
 
 /**
@@ -21,9 +23,9 @@ defined('MOODLE_INTERNAL') || die;
 function local_cpd_extends_navigation(global_navigation $navroot) {
     $navprof = $navroot->find('myprofile', navigation_node::TYPE_ROOTNODE);
 
-    $navnode = $navprof->add(get_string('mycpd', 'local_cpd'),
+    $navnode = $navprof->add(util::string('mycpd'),
                              new moodle_url('/local/cpd/index.php'),
                              navigation_node::NODETYPE_LEAF,
-                             get_string('cpd', 'report_cpd'),
+                             util::string('mycpd'),
                              'local_cpd-mycpd');
 }
