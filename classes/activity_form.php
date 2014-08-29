@@ -32,6 +32,9 @@ class activity_form extends moodleform {
         $mform->addElement('editor', 'objective', util::string('objective'));
         $mform->setType('editor', PARAM_TEXT);
 
+        $mform->addElement('date_selector', 'duedate', util::string('datedue'));
+        $mform->setType('duedate', PARAM_INT);
+
         $mform->addElement('editor', 'development_need',
                            util::string('developmentneed'));
         $mform->setType('development_need', PARAM_TEXT);
@@ -42,6 +45,10 @@ class activity_form extends moodleform {
 
         $mform->addElement('editor', 'activity', util::string('activity'));
         $mform->setType('activity', PARAM_TEXT);
+
+        $mform->addElement('select', 'cpdyearid', util::string('year'),
+                           year::menu());
+        $mform->setType('cpdyearid', PARAM_INT);
 
         $mform->addElement('date_selector', 'startdate',
                            util::string('datestart'));

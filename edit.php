@@ -69,6 +69,7 @@ if ($mform->is_cancelled()) {
     $data->userid = $userid;
     $activity = activity::model_from_form($data);
     $activity->save();
+    redirect($listurl);
 } else {
     $mform->set_data($activity->model_to_form());
 
