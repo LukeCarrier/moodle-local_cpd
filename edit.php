@@ -38,6 +38,7 @@ $userid = optional_param('userid', $USER->id, PARAM_INT);
 $isowncpd = $userid === $USER->id;
 
 $editurl = new moodle_url('/local/cpd/edit.php');
+$listurl = new moodle_url('/local/cpd/index.php');
 
 if ($id) {
     $activity = activity::get_by_id($id);
