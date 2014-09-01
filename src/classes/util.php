@@ -40,21 +40,28 @@ class util {
      *
      * @var int
      */
-    const ACTION_REPORT_VIEW = 3;
+    const ACTION_REPORT_VIEW = 1;
+
+    /**
+     * Action: delete activity.
+     *
+     * @var int
+     */
+    const ACTION_ACTIVITY_DELETE = 2;
+
+    /**
+     * Action: edit activity.
+     *
+     * @var int
+     */
+    const ACTION_ACTIVITY_EDIT = 3;
 
     /**
      * Action: log new activity.
      *
      * @var int
      */
-    const ACTION_ACTIVITY_LOG  = 1;
-    
-    /**
-     * Action: edit activity.
-     *
-     * @var int
-     */
-    const ACTION_ACTIVITY_EDIT = 2;
+    const ACTION_ACTIVITY_LOG = 4;
 
     /**
      * What is the module's name?
@@ -99,6 +106,13 @@ class util {
         }
 
         switch ($action) {
+            case static::ACTION_ACTIVITY_DELETE:
+                $PAGE->navbar->add(util::string('deletingx',
+                                                $activity->activity),
+                                   new moodle_url('/local/cpd/delete.php',
+                                                  array('id' => $activity->id)));
+                break;
+
             case static::ACTION_ACTIVITY_EDIT:
                 $PAGE->navbar->add(util::string('editingx',
                                    $activity->activity));

@@ -33,11 +33,14 @@ require_once dirname(dirname(__DIR__)) . '/config.php';
 
 $id = required_param('id', PARAM_INT);
 
-$context = context_user::instance($activity->userid);
+$activity = activity::get_by_id($id);
+
+$isowncpd = $activity->userid === $USER->id;
+$user     = $isowncpd ? $USER : core_user::get_user($activity->userid);
+
+$context = context_user::instance($user->id);
 require_login();
 require_capability('local/cpd:edituserreport', $context);
-
-$activity = activity::get_by_id($id);
 
 $deleteurl = new moodle_url('/local/cpd/delete.php', array(
     'id' => $activity->id,
@@ -50,8 +53,7 @@ $PAGE->set_context($context);
 $PAGE->set_title($titlestr);
 $PAGE->set_url($deleteurl);
 
-$PAGE->navigation->find('local_cpd-mycpd')->make_active();
-$PAGE->navbar->add($titlestr);
+util::normalise_navigation($user, util::ACTION_ACTIVITY_DELETE, $activity);
 
 if (confirm_sesskey()) {
     $activity->delete();
