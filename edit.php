@@ -22,7 +22,10 @@ require_login();
 $id     = optional_param('id',     null,      PARAM_INT);
 $userid = optional_param('userid', $USER->id, PARAM_INT);
 
-/* We ned to handle the user context instance with care.
+$editurl = new moodle_url('/local/cpd/edit.php');
+$listurl = new moodle_url('/local/cpd/index.php');
+
+/* We need to handle the user context instance with care.
  *
  * We allow viewing and modifying another user's CPD report by people holding
  * the appropriate capabilities within the target user's context.
@@ -35,18 +38,13 @@ $userid = optional_param('userid', $USER->id, PARAM_INT);
  *    supply the ID of another user whilst editing a record belonging to a
  *    third. */
 
-$isowncpd = $userid === $USER->id;
-
-$editurl = new moodle_url('/local/cpd/edit.php');
-$listurl = new moodle_url('/local/cpd/index.php');
-
 if ($id) {
     $activity = activity::get_by_id($id);
     $titlestr = util::string('editingx', $activity->activity);
     $userid   = $activity->userid;
 
     $editurl->param('id', $activity->id);
-    if (!$isowncpd) {
+    if ($userid !== $USER->id) {
         $editurl->param('userid', $activity->userid);
     }
 } else {
@@ -54,12 +52,21 @@ if ($id) {
     $titlestr = util::string('logging');
 }
 
+$isowncpd = $userid === $USER->id;
+$user     = $isowncpd ? $USER : core_user::get_user($userid);
+
 $context = context_user::instance($userid);
 require_capability('local/cpd:edituserreport', $context);
 
 $PAGE->set_context($context);
 $PAGE->set_title($titlestr);
 $PAGE->set_url($editurl);
+
+if ($id) {
+    util::normalise_navigation($user, util::ACTION_ACTIVITY_EDIT, $activity);
+} else {
+    util::normalise_navigation($user, util::ACTION_ACTIVITY_LOG);
+}
 
 $mform = new activity_form();
 

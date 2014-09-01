@@ -14,16 +14,86 @@
 namespace local_cpd;
 
 use lang_string;
+use moodle_url;
+use navbar;
 
 defined('MOODLE_INTERNAL') || die;
 
 class util {
+    /**
+     * Action: edit activity.
+     *
+     * @var int
+     */
+    const ACTION_REPORT_VIEW = 3;
+
+    /**
+     * Action: log new activity.
+     *
+     * @var int
+     */
+    const ACTION_ACTIVITY_LOG  = 1;
+    
+    /**
+     * Action: edit activity.
+     *
+     * @var int
+     */
+    const ACTION_ACTIVITY_EDIT = 2;
+
     /**
      * What is the module's name?
      *
      * @var string
      */
     const MOODLE_MODULE = 'local_cpd';
+
+    /**
+     * Normalise navigation bar.
+     *
+     * Moodle's navigation bar and block seem to get lost with our URLs, so
+     * we'll manually configure them both here.
+     *
+     * @param \stdClass           $user     The user whose CPD report is being
+     *                                      viewed or edited.
+     * @param integer             $action   One of the ACTION_* constants.
+     * @param \local_cpd\activity $activity (Optional) activity ID, if editing
+     *                                      one.
+     *
+     * @return void
+     */
+    public static function normalise_navigation($user, $action, $activity=null) {
+        global $PAGE, $USER;
+
+        $PAGE->navbar->ignore_active();
+
+        if ($user->id === $USER->id) {
+            $PAGE->navbar->add(util::string('myprofile', null, 'moodle'));
+            $PAGE->navbar->add(util::string('mycpd'),
+                               new moodle_url('/local/cpd/index.php'));
+        } else {
+            $PAGE->navbar->add(util::string('users', null, 'moodle'),
+                               new moodle_url('/user/index.php',
+                                              array('id' => $USER->id)));
+            $PAGE->navbar->add(fullname($user),
+                               new moodle_url('/user/profile.php',
+                                              array('id' => $user->id)));
+            $PAGE->navbar->add(util::string('cpd'),
+                               new moodle_url('/local/cpd/index.php',
+                                              array('userid' => $user->id)));
+        }
+
+        switch ($action) {
+            case static::ACTION_ACTIVITY_EDIT:
+                $PAGE->navbar->add(util::string('editingx',
+                                   $activity->activity));
+                break;
+
+            case static::ACTION_ACTIVITY_LOG:
+                $PAGE->navbar->add(util::string('logging'));
+                break;
+        }
+    }
 
     /**
      * Get a language string.

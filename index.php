@@ -12,8 +12,8 @@
  */
 
 use local_cpd\activity;
-use local_cpd\activity_type;
 use local_cpd\activity_filter_form;
+use local_cpd\activity_type;
 use local_cpd\util;
 use local_cpd\year;
 
@@ -21,7 +21,8 @@ require_once dirname(dirname(__DIR__)) . '/config.php';
 
 require_once __DIR__ . '/lib.php';
 
-require_login(); // $USER might not be set
+require_login();
+
 $userid = optional_param('userid', $USER->id, PARAM_INT);
 
 $isowncpd = $userid === $USER->id;
@@ -44,6 +45,8 @@ if ($isowncpd) {
 $PAGE->set_context($context);
 $PAGE->set_title($titlestr);
 $PAGE->set_url($listurl);
+
+util::normalise_navigation($user, util::ACTION_REPORT_VIEW);
 
 $filterform = new activity_filter_form(null, null, 'get');
 $filterform->set_data(array('userid' => $user->id));
