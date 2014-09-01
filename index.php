@@ -27,12 +27,12 @@ $userid = optional_param('userid', $USER->id, PARAM_INT);
 $isowncpd = $userid === $USER->id;
 $user     = $isowncpd ? $USER : core_user::get_user($userid);
 
-$context = context_user::instance($user->id);
-require_capability('local/cpd:viewuserreport', $context);
-
 $deleteurl = new moodle_url('/local/cpd/delete.php');
 $editurl   = new moodle_url('/local/cpd/edit.php');
 $listurl   = new moodle_url('/local/cpd/index.php');
+
+$context = context_user::instance($user->id);
+require_capability('local/cpd:viewuserreport', $context);
 
 if ($isowncpd) {
     $titlestr = util::string('mycpd');
