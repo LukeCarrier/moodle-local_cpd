@@ -35,4 +35,4 @@ $plugin->maturity  = MATURITY_ALPHA;
 
 // Version format:  YYYYMMDDXX
 $plugin->version  = 2014073100;
-$plugin->requires = null;
+$plugin->requires = 2010112400;
