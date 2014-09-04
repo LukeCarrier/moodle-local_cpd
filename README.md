@@ -28,6 +28,15 @@ Requirements
 
 * Moodle 2.0+, but only tested on 2.6+.
 
+Upgrading from report_cpd
+-------------------------
+
+0. Back up your Moodle database!
+1. Download an archive of the plugin and extract its contents into the ```local``` directory
+2. Execute ```php local/cpd/cli/upgrade_from_report_cpd.php```
+3. Remove the ```report/cpd``` directory
+4. Execute ```php admin/cli/upgrade.php```
+
 Building
 --------
 
