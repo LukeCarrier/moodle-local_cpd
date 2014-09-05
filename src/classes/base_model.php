@@ -65,16 +65,8 @@ abstract class base_model {
      * @param string $property The name of the property to set.
      * @param mixed  $value    The property's new value.
      */
-    final public function __set($property, $value) {}
-
-    /**
-     * Handle a call to an undefined method.
-     *
-     * @param string  $method The method that was called.
-     * @param mixed[] The set of arguments that the method was called with.
-     */
-    final public function __call($method, $arguments) {
-        throw new moodle_exception('nosuchmethod', 'local_cpd', $method);
+    final public function __set($property, $value) {
+        $this->{$property} = $value;
     }
 
     /**
