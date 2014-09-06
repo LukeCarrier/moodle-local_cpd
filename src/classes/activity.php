@@ -244,7 +244,7 @@ class activity extends base_model {
      * @return \local_cpd\status The CPD activity's status.
      */
     final protected function model_accessor_activitytype() {
-        return activity_type::get_by_id($this->statusid);
+        return activity_type::get_by_id($this->activitytypeid);
     }
 
     /**
