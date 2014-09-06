@@ -267,7 +267,8 @@ class activity extends base_model {
                           $data->activitytypeid, $data->activity['text'],
                           $data->activity['format'], $data->duedate,
                           $data->startdate, $data->enddate,
-                          $data->status, $data->cpdyearid, $data->timetaken);
+                          $data->status, $data->cpdyearid,
+                          $data->timetaken / MINSECS);
     }
 
     /**
