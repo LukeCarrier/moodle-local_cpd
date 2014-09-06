@@ -34,7 +34,7 @@ require_once dirname(dirname(__DIR__)) . '/config.php';
 
 require_login();
 
-$id     = optional_param('id',     null,      PARAM_INT);
+$id     = optional_param('id',     0,         PARAM_INT);
 $userid = optional_param('userid', $USER->id, PARAM_INT);
 
 $editurl = new moodle_url('/local/cpd/edit.php');
@@ -90,6 +90,7 @@ if ($mform->is_cancelled()) {
 } elseif ($data = $mform->get_data()) {
     $data->userid = $userid;
     $activity = activity::model_from_form($data);
+    $activity->id = ($id === 0) ? null : $id;
     $activity->save();
     redirect($listurl);
 } else {
