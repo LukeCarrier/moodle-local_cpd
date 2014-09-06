@@ -30,9 +30,9 @@ defined('MOODLE_INTERNAL') || die;
 
 // Release information
 $plugin->component = 'local_cpd';
-$plugin->release   = '0.1.1';
+$plugin->release   = '0.1.2';
 $plugin->maturity  = MATURITY_ALPHA;
 
 // Version format:  YYYYMMDDXX
-$plugin->version  = 2014073100;
+$plugin->version  = 2014073102;
 $plugin->requires = 2010112400;
