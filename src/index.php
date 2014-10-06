@@ -87,10 +87,12 @@ if ($filters = $filterform->get_data()) {
 }
 
 if (count($years)) {
-    $yearids = util::reduce($years, 'id');
-    list($sql, $params) = $DB->get_in_or_equal($yearids);
-    $params[] = $user->id;
-    $activities = activity::find_select("cpdyearid {$sql} AND userid = ?", $params);
+    $params = array(
+        reset($years)->startdate,
+        end($years)->enddate,
+        $user->id,
+    );
+    $activities = activity::find_select('startdate >= ? AND enddate <= ? AND userid = ?', $params);
 } else {
     $activities = activity::find_by_userid($user->id);
 }
