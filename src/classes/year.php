@@ -70,7 +70,7 @@ class year extends base_model {
      */
     final public static function find_between($startdate, $enddate) {
         return static::find_select('startdate > ? AND enddate < ?',
-                                   array($startdate, $enddate));
+                                   array($startdate, $enddate), 'startdate');
     }
 
     /**
