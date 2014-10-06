@@ -92,7 +92,8 @@ if (count($years)) {
         end($years)->enddate,
         $user->id,
     );
-    $activities = activity::find_select('startdate >= ? AND enddate <= ? AND userid = ?', $params);
+
+    $activities = activity::find_select('(startdate >= ? AND enddate <= ?) AND userid = ?', $params);
 } else {
     $activities = activity::find_by_userid($user->id);
 }
