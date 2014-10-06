@@ -188,7 +188,7 @@ class activity extends base_model {
         $this->enddate              = $enddate;
         $this->statusid             = $statusid;
         $this->cpdyearid            = $cpdyearid;
-        $this->timetaken            = $timetaken ; 
+        $this->timetaken            = $timetaken;
     }
 
     /**
