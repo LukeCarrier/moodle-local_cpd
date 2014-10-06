@@ -80,7 +80,7 @@ if ($filters = $filterform->get_data()) {
             $years[] = year::get_by_id($id);
         }
     } else {
-        $years = year::all();
+        $years = array();
     }
 } else {
     $years = array();
