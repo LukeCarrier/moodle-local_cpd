@@ -83,7 +83,7 @@ if ($filters = $filterform->get_data()) {
         $years = year::all();
     }
 } else {
-    $years = year::all();
+    $years = array();
 }
 
 if (count($years)) {
@@ -92,7 +92,7 @@ if (count($years)) {
     $params[] = $user->id;
     $activities = activity::find_select("cpdyearid {$sql} AND userid = ?", $params);
 } else {
-    $activities = array();
+    $activities = activity::find_by_userid($user->id);
 }
 
 echo
