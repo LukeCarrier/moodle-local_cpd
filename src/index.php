@@ -80,19 +80,26 @@ if ($filters = $filterform->get_data()) {
             $years[] = year::get_by_id($id);
         }
     } else {
-        $years = year::all();
+        $years = array();
     }
 } else {
-    $years = year::all();
+    $years = array();
 }
 
 if (count($years)) {
-    $yearids = util::reduce($years, 'id');
-    list($sql, $params) = $DB->get_in_or_equal($yearids);
-    $params[] = $user->id;
-    $activities = activity::find_select("cpdyearid {$sql} AND userid = ?", $params);
+    $startdate = reset($years)->startdate;
+    $enddate   = end($years)->enddate;
+    $params = array(
+        $startdate,
+        $enddate,
+        $startdate,
+        $enddate,
+        $user->id,
+    );
+
+    $activities = activity::find_select('((startdate BETWEEN ? AND ?) OR (enddate BETWEEN ? AND ?)) AND userid = ?', $params);
 } else {
-    $activities = array();
+    $activities = activity::find_by_userid($user->id);
 }
 
 echo

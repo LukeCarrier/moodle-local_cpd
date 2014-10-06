@@ -61,10 +61,6 @@ class activity_form extends moodleform {
         $mform->addElement('editor', 'activity', util::string('activity'));
         $mform->setType('activity', PARAM_TEXT);
 
-        $mform->addElement('select', 'cpdyearid', util::string('year'),
-                           year::menu());
-        $mform->setType('cpdyearid', PARAM_INT);
-
         $mform->addElement('date_selector', 'startdate',
                            util::string('datestart'));
         $mform->setType('startdate', PARAM_INT);

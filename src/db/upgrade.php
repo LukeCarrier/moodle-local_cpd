@@ -48,5 +48,16 @@ function xmldb_local_cpd_upgrade($oldversion) {
         upgrade_plugin_savepoint(true, 2014073100, 'local', 'cpd');
     }
 
+    if ($oldversion < 2014100600) {
+        $table = new xmldb_table('cpd');
+
+        $dbmgr->drop_key($table, new xmldb_key('cpd_year_fk', XMLDB_KEY_FOREIGN,
+                                               array('cpdyearid'),
+                                               'cpd_year', array('id')));
+        $dbmgr->drop_field($table, new xmldb_field('cpdyearid'));
+
+        upgrade_plugin_savepoint(true, 2014100600, 'local', 'cpd');
+    }
+
     return true;
 }

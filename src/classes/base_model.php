@@ -142,14 +142,19 @@ abstract class base_model {
      *
      * @param string  $select A parameterised SQL string.
      * @param mixed[] $params Parameters to substitute into the query.
+     * @param string  $sort   SQL fragment to order the result set by.
      *
      * @return base_model An array of objects, all subclasses of base_model.
      */
-    final public static function find_select($select, $params) {
+    final public static function find_select($select, $params=null, $sort=null) {
         global $DB;
 
+        if ($params === null) {
+            $params = array();
+        }
+
         $records = $DB->get_records_select(static::model_table(), $select,
-                                           $params);
+                                           $params, $sort);
         $records = is_array($records) ? $records : array(); // 0 records = false
 
         return static::model_from_many_dml($records);
