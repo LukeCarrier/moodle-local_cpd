@@ -140,13 +140,6 @@ class activity extends base_model {
     protected $statusid;
 
     /**
-     * CPD year ID.
-     *
-     * @var integer
-     */
-    protected $cpdyearid;
-
-    /**
      * Time taken (seconds).
      *
      * @var integer
@@ -167,14 +160,13 @@ class activity extends base_model {
      * @param integer $duedate
      * @param integer $enddate
      * @param integer $statusid
-     * @param integer $cpdyearid
      * @param integer $timetaken
      */
     final public function __construct($userid=null, $objective=null,
             $objective_fmt=null, $development_need=null,
             $development_need_fmt=null, $activitytypeid=null, $activity=null,
             $activity_format=null, $duedate=null, $startdate=null,
-            $enddate=null, $statusid=null, $cpdyearid=null, $timetaken=null) {
+            $enddate=null, $statusid=null, $timetaken=null) {
         $this->userid               = $userid;
         $this->objective            = $objective;
         $this->objective_fmt        = $objective_fmt;
@@ -187,7 +179,6 @@ class activity extends base_model {
         $this->startdate            = $startdate;
         $this->enddate              = $enddate;
         $this->statusid             = $statusid;
-        $this->cpdyearid            = $cpdyearid;
         $this->timetaken            = $timetaken;
     }
 
@@ -267,8 +258,7 @@ class activity extends base_model {
                           $data->activitytypeid, $data->activity['text'],
                           $data->activity['format'], $data->duedate,
                           $data->startdate, $data->enddate,
-                          $data->status, $data->cpdyearid,
-                          $data->timetaken / MINSECS);
+                          $data->status, $data->timetaken / MINSECS);
     }
 
     /**
@@ -309,7 +299,6 @@ class activity extends base_model {
             'startdate',
             'enddate',
             'statusid',
-            'cpdyearid',
             'timetaken',
         );
     }
