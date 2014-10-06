@@ -87,13 +87,17 @@ if ($filters = $filterform->get_data()) {
 }
 
 if (count($years)) {
+    $startdate = reset($years)->startdate;
+    $enddate   = end($years)->enddate;
     $params = array(
-        reset($years)->startdate,
-        end($years)->enddate,
+        $startdate,
+        $enddate,
+        $startdate,
+        $enddate,
         $user->id,
     );
 
-    $activities = activity::find_select('(startdate >= ? AND enddate <= ?) AND userid = ?', $params);
+    $activities = activity::find_select('((startdate BETWEEN ? AND ?) OR (enddate BETWEEN ? AND ?)) AND userid = ?', $params);
 } else {
     $activities = activity::find_by_userid($user->id);
 }
