@@ -41,8 +41,6 @@
                        NOTNULL="false" UNSIGNED="true" SEQUENCE="false" />
                 <FIELD NAME="statusid" TYPE="int" LENGTH="10"
                        NOTNULL="false" UNSIGNED="true" SEQUENCE="false" />
-                <FIELD NAME="cpdyearid" TYPE="int" LENGTH="10"
-                       NOTNULL="true" UNSIGNED="true" SEQUENCE="false" />
                 <FIELD NAME="timetaken" TYPE="int" LENGTH="10"
                        NOTNULL="false" UNSIGNED="true" SEQUENCE="false" />
             </FIELDS>
@@ -54,8 +52,6 @@
                      REFTABLE="cpd_activity_type" REFFIELDS="id" />
                 <KEY NAME="cpd_status_fk" TYPE="foreign" FIELDS="statusid"
                      REFTABLE="cpd_status" REFFIELDS="id" />
-                <KEY NAME="cpd_year_fk" TYPE="foreign" FIELDS="cpdyearid"
-                     REFTABLE="cpd_year" REFFIELDS="id" />
             </KEYS>
         </TABLE>
         <TABLE NAME="cpd_activity_type" COMMENT="Defines the activity types">
