@@ -51,7 +51,7 @@ abstract class base_model {
     final public function __get($property) {
         if (static::model_has_accessor($property)) {
             $accessor = array($this, "model_accessor_{$property}");
-            return $accessor();
+            return call_user_func($accessor);
         } elseif (static::model_has_field($property)) {
             return $this->{$property};
         }
