@@ -31,6 +31,7 @@ use local_cpd\activity_form;
 use local_cpd\util;
 
 require_once dirname(dirname(__DIR__)) . '/config.php';
+require_once __DIR__ . '/lib.php';
 
 require_login();
 
