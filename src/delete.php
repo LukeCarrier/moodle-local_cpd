@@ -37,7 +37,8 @@ $id = required_param('id', PARAM_INT);
 $activity = activity::get_by_id($id);
 
 $isowncpd = $activity->userid === $USER->id;
-$user     = $isowncpd ? $USER : core_user::get_user($activity->userid);
+$user     = $isowncpd
+        ? $USER : $DB->get_record('user', array('id' => $activity->userid));
 
 $context = context_user::instance($user->id);
 require_login();

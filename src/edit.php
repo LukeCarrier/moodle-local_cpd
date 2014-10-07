@@ -69,7 +69,8 @@ if ($id) {
 }
 
 $isowncpd = $userid === $USER->id;
-$user     = $isowncpd ? $USER : core_user::get_user($userid);
+$user     = $isowncpd
+        ? $USER : $DB->get_record('user', array('id' => $userid));
 
 $context = context_user::instance($userid);
 require_capability('local/cpd:edituserreport', $context);

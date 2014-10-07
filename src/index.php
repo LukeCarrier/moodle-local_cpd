@@ -40,7 +40,8 @@ require_login();
 $userid = optional_param('userid', $USER->id, PARAM_INT);
 
 $isowncpd = $userid === $USER->id;
-$user     = $isowncpd ? $USER : core_user::get_user($userid);
+$user     = $isowncpd
+        ? $USER : $DB->get_record('user', array('id' => $userid));
 
 $deleteurl = new moodle_url('/local/cpd/delete.php');
 $editurl   = new moodle_url('/local/cpd/edit.php');
