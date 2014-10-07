@@ -26,7 +26,8 @@ License
 Requirements
 ------------
 
-* Moodle 2.0+, but only tested on 2.6+.
+* Moodle 2.5+.
+* PHP 5.3+.
 
 Upgrading from report_cpd
 -------------------------
