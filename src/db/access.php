@@ -29,6 +29,7 @@
 defined('MOODLE_INTERNAL') || die;
 
 $capabilities = array(
+
     /*
      * View a user's CPD report.
      */
@@ -52,4 +53,6 @@ $capabilities = array(
             'user' => CAP_ALLOW,
         ),
     ),
+
+
 );
