@@ -32,12 +32,14 @@ defined('MOODLE_INTERNAL') || die;
 $string['pluginname'] = 'CPD';
 
 // Menu items and page titles
-$string['cpd']       = 'CPD';
-$string['cpdforx']   = '{$a}\'s CPD';
-$string['deletingx'] = 'Deleting "{$a}"';
-$string['editingx']  = 'Editing "{$a}"';
-$string['logging']   = 'Logging CPD activity';
-$string['mycpd']     = 'My CPD';
+$string['cpd']                 = 'CPD';
+$string['cpdforx']             = '{$a}\'s CPD';
+$string['deletingx']           = 'Deleting "{$a}"';
+$string['editingx']            = 'Editing "{$a}"';
+$string['logging']             = 'Logging CPD activity';
+$string['manageactivitytypes'] = 'Manage activity types';
+$string['manageyears']         = 'Manage CPD years';
+$string['mycpd']               = 'My CPD';
 
 // Activity table
 $string['activity']        = 'Activity';
@@ -50,6 +52,10 @@ $string['nocpdactivities'] = 'There are no activities to display.';
 $string['objective']       = 'Objective';
 $string['status']          = 'Status';
 $string['timetaken']       = 'Time Taken';
+
+// Year management table
+$string['yearend']   = 'End date';
+$string['yearstart'] = 'Start date';
 
 // Year filter table
 $string['filterby']      = 'Filter by';
@@ -64,8 +70,10 @@ $string['whylogactivity'] = 'Please ensure your CPD activity log is up to date b
 $string['confirmdeleteofx'] = 'Are you sure you wish to delete "{$a}"?';
 
 // Access capabilities
-$string['cpd:edituserreport'] = 'Edit a user\'s CPD report';
-$string['cpd:viewuserreport'] = 'View a user\'s CPD report';
+$string['cpd:edituserreport']      = 'Edit a user\'s CPD report';
+$string['cpd:manageactivitytypes'] = 'Manage activity types';
+$string['cpd:manageyears']         = 'Manage CPD years';
+$string['cpd:viewuserreport']      = 'View a user\'s CPD report';
 
 // Model exceptions
 $string['model:incompleteimplementation'] = 'Attempt to use model "{$a}" which is incomplete';

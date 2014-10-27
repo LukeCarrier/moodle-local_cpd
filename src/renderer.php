@@ -26,6 +26,7 @@
  * @license GPL v3
  */
 
+use local_cpd\url_generator;
 use local_cpd\util;
 
 defined('MOODLE_INTERNAL') || die;
@@ -73,13 +74,10 @@ class local_cpd_renderer extends plugin_renderer_base {
             new lang_string('actions'),
         );
 
-        $deleteicon = new action_link(new moodle_url('/local/cpd/delete.php', array(
-            'id'      => null,
-            'sesskey' => sesskey(),
-        )), new pix_icon('t/delete', new lang_string('delete')));
-        $editicon   = new action_link(new moodle_url('/local/cpd/edit.php',   array(
-            'id' => null,
-        )), new pix_icon('t/edit', new lang_string('edit')));
+        $deleteicon = new action_link(url_generator::delete_activity(null, sesskey()),
+                                      new pix_icon('t/delete', new lang_string('delete')));
+        $editicon   = new action_link(url_generator::edit_activity(null),
+                                      new pix_icon('t/edit', new lang_string('edit')));
 
         foreach ($activities as $activity) {
             $activitystatus = $activity->status;

@@ -91,8 +91,7 @@ class util {
 
         if ($user->id === $USER->id) {
             $PAGE->navbar->add(util::string('myprofile', null, 'moodle'));
-            $PAGE->navbar->add(util::string('mycpd'),
-                               new moodle_url('/local/cpd/index.php'));
+            $PAGE->navbar->add(util::string('mycpd'), url_generator::index());
         } else {
             $PAGE->navbar->add(util::string('users', null, 'moodle'),
                                new moodle_url('/user/index.php',
@@ -101,16 +100,14 @@ class util {
                                new moodle_url('/user/profile.php',
                                               array('id' => $user->id)));
             $PAGE->navbar->add(util::string('cpd'),
-                               new moodle_url('/local/cpd/index.php',
-                                              array('userid' => $user->id)));
+                               url_generator::index($user->id));
         }
 
         switch ($action) {
             case static::ACTION_ACTIVITY_DELETE:
                 $PAGE->navbar->add(util::string('deletingx',
                                                 $activity->activity),
-                                   new moodle_url('/local/cpd/delete.php',
-                                                  array('id' => $activity->id)));
+                                   url_generator::delete_activitiy($activity->id));
                 break;
 
             case static::ACTION_ACTIVITY_EDIT:

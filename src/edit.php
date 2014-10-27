@@ -28,6 +28,7 @@
 
 use local_cpd\activity;
 use local_cpd\activity_form;
+use local_cpd\url_generator;
 use local_cpd\util;
 
 require_once dirname(dirname(__DIR__)) . '/config.php';
@@ -38,8 +39,8 @@ require_login();
 $id     = optional_param('id',     0,         PARAM_INT);
 $userid = optional_param('userid', $USER->id, PARAM_INT);
 
-$editurl = new moodle_url('/local/cpd/edit.php');
-$listurl = new moodle_url('/local/cpd/index.php');
+$editurl = url_generator::edit_activity();
+$listurl = url_generator::index();
 
 /* We need to handle the user context instance with care.
  *

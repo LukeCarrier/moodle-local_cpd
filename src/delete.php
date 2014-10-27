@@ -27,6 +27,7 @@
  */
 
 use local_cpd\activity;
+use local_cpd\url_generator;
 use local_cpd\util;
 
 require_once dirname(dirname(__DIR__)) . '/config.php';
@@ -44,10 +45,8 @@ $context = context_user::instance($user->id);
 require_login();
 require_capability('local/cpd:edituserreport', $context);
 
-$deleteurl = new moodle_url('/local/cpd/delete.php', array(
-    'id' => $activity->id,
-));
-$listurl = new moodle_url('/local/cpd/index.php');
+$deleteurl = url_generator::delete_activity($activity->id);
+$listurl   = url_generator::index('/local/cpd/index.php');
 
 $titlestr = util::string('deletingx', $activity->activity);
 

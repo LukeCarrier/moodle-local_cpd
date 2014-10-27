@@ -29,6 +29,7 @@
 use local_cpd\activity;
 use local_cpd\activity_filter_form;
 use local_cpd\activity_type;
+use local_cpd\url_generator;
 use local_cpd\util;
 use local_cpd\year;
 
@@ -43,9 +44,9 @@ $isowncpd = $userid === $USER->id;
 $user     = $isowncpd
         ? $USER : $DB->get_record('user', array('id' => $userid));
 
-$deleteurl = new moodle_url('/local/cpd/delete.php');
-$editurl   = new moodle_url('/local/cpd/edit.php');
-$listurl   = new moodle_url('/local/cpd/index.php');
+$deleteurl = url_generator::delete_activity();
+$editurl   = url_generator::edit_activity();
+$listurl   = url_generator::index();
 
 $context = context_user::instance($user->id);
 require_capability('local/cpd:viewuserreport', $context);
@@ -66,7 +67,7 @@ util::normalise_navigation($user, util::ACTION_REPORT_VIEW);
 $filterform = new activity_filter_form(null, null, 'get');
 $filterform->set_data(array('userid' => $user->id));
 
-$PAGE->requires->css(new moodle_url('/local/cpd/style.css'));
+$PAGE->requires->css(new moodle_url(url_generator::CPD_URL . '/style.css'));
 
 $renderer = $PAGE->get_renderer('local_cpd');
 
