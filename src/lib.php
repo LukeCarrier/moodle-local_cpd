@@ -63,6 +63,10 @@ if ($CFG->release < 2013111800) {
  * @return void
  */
 function local_cpd_extends_navigation(global_navigation $navroot) {
+    if (!isloggedin()) {
+        return;
+    }
+
     $cpdurl = new moodle_url('/local/cpd/index.php');
 
     $navmy = $navroot->find('myprofile', navigation_node::TYPE_ROOTNODE);
