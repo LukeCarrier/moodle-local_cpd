@@ -62,9 +62,8 @@ if (confirm_sesskey()) {
 } else {
     $deleteurl->param('sesskey', sesskey());
 
-    echo
-            $OUTPUT->header(),
-            $OUTPUT->confirm(util::string('confirmdeleteofx', $activity->activity),
-                             $deleteurl, $listurl),
-            $OUTPUT->footer();
+    echo $OUTPUT->header(),
+         $OUTPUT->confirm(util::string('confirmdeleteofx', $activity->activity),
+                          $deleteurl, $listurl),
+         $OUTPUT->footer();
 }

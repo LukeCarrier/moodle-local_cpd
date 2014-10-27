@@ -103,12 +103,10 @@ if (count($years)) {
     $activities = activity::find_by_userid($user->id);
 }
 
-echo
-        $OUTPUT->header(),
-        $OUTPUT->heading($titlestr);
+echo $OUTPUT->header(),
+     $OUTPUT->heading($titlestr);
 $filterform->display();
-echo
-        $renderer->cpd_activity_table($activities, $editurl, $deleteurl),
-        $renderer->cpd_callout(util::string('whylogactivity'), $editurl,
-                               util::string('logactivity')),
-        $OUTPUT->footer();
+echo $renderer->cpd_activity_table($activities, $editurl, $deleteurl),
+     $renderer->cpd_callout(util::string('whylogactivity'), $editurl,
+                            util::string('logactivity')),
+     $OUTPUT->footer();

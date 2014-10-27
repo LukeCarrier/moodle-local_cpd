@@ -99,10 +99,8 @@ if ($mform->is_cancelled()) {
 } else {
     $mform->set_data($activity->model_to_form());
 
-    echo
-            $OUTPUT->header(),
-            $OUTPUT->heading($titlestr);
+    echo $OUTPUT->header(),
+         $OUTPUT->heading($titlestr);
     $mform->display();
-    echo
-            $OUTPUT->footer();
+    echo $OUTPUT->footer();
 }
