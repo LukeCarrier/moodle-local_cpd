@@ -109,5 +109,6 @@ echo
 $filterform->display();
 echo
         $renderer->cpd_activity_table($activities, $editurl, $deleteurl),
-        $renderer->cpd_activity_add($editurl),
+        $renderer->cpd_callout(util::string('whylogactivity'), $editurl,
+                               util::string('logactivity')),
         $OUTPUT->footer();
