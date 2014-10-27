@@ -36,17 +36,59 @@ defined('MOODLE_INTERNAL') || die;
  */
 class local_cpd_renderer extends plugin_renderer_base {
     /**
+     * Render a list of action buttons.
+     *
+     * @param \action_link[] $actionbuttons An array of action button components
+     *                                      to render.
+     *
+     * @return string The renderered HTML.
+     */
+    protected function cpd_action_buttons($actionbuttons) {
+        $renderedactionbuttons = array();
+        foreach ($actionbuttons as $actionbutton) {
+            $renderedactionbuttons[] = $this->render($actionbutton);
+        }
+
+        return html_writer::alist($renderedactionbuttons, array(
+            'class' => 'cpd-actions',
+        ));
+    }
+    /**
      * Render the "Add CPD activity" select and button.
      *
      * @param \moodle_url $editurl The URL to link edit buttons to.
      *
      * @return string The rendered HTML.
      */
-    public function cpd_activity_add($editurl) {
-        $content = html_writer::tag('span', util::string('whylogactivity'), array('class' => 'cpd-why-log'))
-                 . $this->single_button($editurl, util::string('logactivity'), 'get');
+    public function cpd_callout($label, $url, $text) {
+        $content = html_writer::tag('span', $label, array('class' => 'cpd-callout-notice'))
+                 . $this->single_button($url, $text, 'get');
 
-        return $this->box($content, 'generalbox cpd-add-box');
+        return $this->box($content, 'generalbox cpd-callout');
+    }
+
+    /**
+     * Do the ground work for rendering a table.
+     *
+     * @param mixed[] $head      An array of html_table_cell objects or strings.
+     * @param string  $editurl   The URL to link edit buttons to.
+     * @param string  $deleteurl The URL to link delete buttons to.
+     *
+     * @return mixed[] An array containing three numerically-indexed values:
+     *                 [0] => html_table  $table
+     *                 [1] => action_link $deletelink
+     *                 [2] => action_link $editlink
+     */
+    protected function cpd_generic_table($head, $editurl, $deleteurl) {
+        $table = new html_table();
+        $table->head = $head;
+
+        $deleteicon = new pix_icon('t/delete', new lang_string('delete'));
+        $deletelink = new action_link($deleteurl, $deleteicon);
+        $editicon   = new pix_icon('t/edit', new lang_string('edit'));
+        $editlink   = new action_link($editurl, $editicon);
+
+        return array($table, $deletelink, $editlink);
     }
 
     /**
@@ -60,8 +102,7 @@ class local_cpd_renderer extends plugin_renderer_base {
      * @return string The rendered HTML.
      */
     public function cpd_activity_table($activities, $editurl, $deleteurl) {
-        $table = new html_table();
-        $table->head = array(
+        $head = array(
             util::string('objective'),
             util::string('developmentneed'),
             util::string('activitytype'),
@@ -74,10 +115,11 @@ class local_cpd_renderer extends plugin_renderer_base {
             new lang_string('actions'),
         );
 
-        $deleteicon = new action_link(url_generator::delete_activity(null, sesskey()),
-                                      new pix_icon('t/delete', new lang_string('delete')));
-        $editicon   = new action_link(url_generator::edit_activity(null),
-                                      new pix_icon('t/edit', new lang_string('edit')));
+        $deleteurl = url_generator::delete_activity(null, sesskey());
+        $editurl   = url_generator::edit_activity(null);
+
+        list($table, $editlink, $deletelink)
+                = $this->cpd_generic_table($head, $editurl, $deleteurl);
 
         foreach ($activities as $activity) {
             $activitystatus = $activity->status;
@@ -86,8 +128,10 @@ class local_cpd_renderer extends plugin_renderer_base {
             $deleteicon->url->param('id', $activity->id);
             $editicon->url->param('id', $activity->id);
 
-            $actionbuttons = $this->render($editicon)
-                           . $this->render($deleteicon);
+            $actionbuttons = $this->cpd_action_buttons(array(
+                $editicon,
+                $deleteicon,
+            ));
 
             $table->data[] = array(
                 $activity->objective,

@@ -62,7 +62,7 @@ $string['filterby']      = 'Filter by';
 $string['year']          = 'CPD year';
 $string['yeardaterange'] = '{$a->startdate} - {$a->enddate}';
 
-// Add activity section of list
+// Add activity callout
 $string['logactivity']    = 'Log CPD activity';
 $string['whylogactivity'] = 'Please ensure your CPD activity log is up to date by logging your CPD activities.';
 

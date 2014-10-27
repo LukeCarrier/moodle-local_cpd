@@ -9,6 +9,16 @@
  * @license GPL v3
  */
 
+.path-local-cpd .cpd-actions,
+.path-admin-local-cpd .cpd-actions {
+    list-style-type: none;
+}
+
+.path-local-cpd .cpd-actions li,
+.path-admin-local-cpd .cpd-actions li {
+    display: inline-block;
+}
+
 .path-local-cpd .cpd-callout,
 .path-admin-local-cpd .cpd-callout {
     border: 1px solid #bbb;
