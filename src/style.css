@@ -14,7 +14,7 @@
     border: 1px solid #bbb;
     border-radius: 0;
     min-height: 30px; /* accomodate the single button's height */
-    line-height: 30px;
+    overflow: auto;
     padding: 5px;
 }
 
