@@ -83,17 +83,42 @@ class year extends base_model {
         $menu  = array();
 
         foreach ($years as $year) {
-            $menu[$year->id] = util::string('yeardaterange', (object) array(
-                'startdate' => userdate($year->startdate,
-                                        util::string('strftimedate', null,
-                                                     'langconfig')),
-                'enddate'   => userdate($year->enddate,
-                                        util::string('strftimedate', null,
-                                                     'langconfig')),
-            ));
+            $menu[$year->id] = $year->get_friendly_range();
         }
 
         return $menu;
+    }
+
+    /**
+     * Get the year's friendly date range.
+     *
+     * @return string The friendly date range.
+     */
+    public function get_friendly_range() {
+        return util::string('yeardaterange', (object) array(
+            'startdate' => $this->get_friendly_startdate(),
+            'enddate'   => $this->get_friendly_enddate(),
+        ));
+    }
+
+    /**
+     * Get the year's friendly end date.
+     *
+     * @return string The friendly end date.
+     */
+    public function get_friendly_enddate() {
+        return userdate($this->enddate,
+                        util::string('strftimedate', null, 'langconfig'));
+    }
+
+    /**
+     * Get the year's friendly start date.
+     *
+     * @return string The friendly start date.
+     */
+    public function get_friendly_startdate() {
+        return userdate($this->startdate,
+                        util::string('strftimedate', null, 'langconfig'));
     }
 
     /**
