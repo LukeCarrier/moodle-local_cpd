@@ -46,7 +46,7 @@ require_login();
 require_capability('local/cpd:edituserreport', $context);
 
 $deleteurl = url_generator::delete_activity($activity->id);
-$listurl   = url_generator::index('/local/cpd/index.php');
+$listurl   = url_generator::index();
 
 $titlestr = util::string('deletingx', $activity->activity);
 
