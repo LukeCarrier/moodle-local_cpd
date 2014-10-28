@@ -46,19 +46,20 @@ class url_generator {
     const CPD_URL = '/local/cpd';
 
     /**
-     * Get activity deletion URL.
+     * Get item's deletion URL.
      *
-     * @param integer $activityid The ID of the activity to delete.
-     * @param string  $sesskey    The session key/nonce, for CSRF prevention.
+     * @param string  $endpoint The URL of the endpoint, relative to CPD_URL.
+     * @param integer $itemid   The ID of the item to delete.
+     * @param string  $sesskey  The session key/nonce, for CSRF prevention.
      *
      * If $sesskey is omitted, the user will be prompted to confirm the deletion
-     * of the activity.
+     * of the item.
      *
-     * @return \moodle_url The activity deletion URL.
+     * @return \moodle_url The deletion URL.
      */
-    public static function delete_activity($activityid=null, $sesskey=null) {
-        $url = new moodle_url(static::CPD_URL . '/delete.php', array(
-            'id' => $activityid,
+    protected static function delete($endpoint, $itemid, $sesskey=null) {
+        $url = new moodle_url(static::CPD_URL . $endpoint, array(
+            'id' => $itemid,
         ));
 
         if ($sesskey !== null) {
@@ -69,6 +70,43 @@ class url_generator {
     }
 
     /**
+     * Get activity deletion URL.
+     *
+     * @param integer $activityid The ID of the activity to delete.
+     * @param string  $sesskey    The session key/nonce, for CSRF prevention.
+     *
+     * @return \moodle_url The activity deletion URL.
+     */
+    public static function delete_activity($activityid=null, $sesskey=null) {
+        return static::delete('/delete.php', $activityid, $sesskey);
+    }
+
+    /**
+     * Get year deletion URL.
+     *
+     * @param integer $yearid  The ID of the year to delete.
+     * @param string  $sesskey The session key/nonce, for CSRF prevention.
+     *
+     * @return \moodle_url The year deletion URL.
+     */
+    public static function delete_year($yearid=null, $sesskey=null) {
+        return static::delete('/deleteyear.php', $yearid, $sesskey);
+    }
+
+    /**
+     * Get item edit URL.
+     *
+     * @param integer $itemid The ID of the activity to edit.
+     *
+     * @return \moodle_url The item edit URL.
+     */
+    public static function edit($endpoint, $itemid=null) {
+        return new moodle_url(static::CPD_URL . $endpoint, array(
+            'id' => $itemid,
+        ));
+    }
+
+    /**
      * Get activity edit URL.
      *
      * @param integer $activityid The ID of the activity to edit.
@@ -76,9 +114,27 @@ class url_generator {
      * @return \moodle_url The activity edit URL.
      */
     public static function edit_activity($activityid=null) {
-        return new moodle_url(static::CPD_URL . '/edit.php', array(
-            'id' => $activityid,
-        ));
+        return static::edit('/edit.php', $activityid);
+    }
+
+    /**
+     * Get year edit URL.
+     *
+     * @param integer $yearid The ID of the year to edit.
+     *
+     * @return \moodle_url The year edit URL.
+     */
+    public static function edit_year($yearid=null) {
+        return static::edit('/edityear.php', $yearid);
+    }
+
+    /**
+     * Get year list URL.
+     *
+     * @return \moodle_url The year list URL.
+     */
+    public static function list_year() {
+        return new moodle_url(static::CPD_URL . '/manageyears.php');
     }
 
     /**

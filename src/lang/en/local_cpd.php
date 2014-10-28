@@ -36,7 +36,9 @@ $string['cpd']                 = 'CPD';
 $string['cpdforx']             = '{$a}\'s CPD';
 $string['deletingx']           = 'Deleting "{$a}"';
 $string['editingx']            = 'Editing "{$a}"';
+$string['editingyearx']        = 'Editing year "{$a}"';
 $string['logging']             = 'Logging CPD activity';
+$string['loggingyear']         = 'Logging CPD year';
 $string['manageactivitytypes'] = 'Manage activity types';
 $string['manageyears']         = 'Manage CPD years';
 $string['mycpd']               = 'My CPD';
@@ -65,6 +67,10 @@ $string['yeardaterange'] = '{$a->startdate} - {$a->enddate}';
 // Add activity callout
 $string['logactivity']    = 'Log CPD activity';
 $string['whylogactivity'] = 'Please ensure your CPD activity log is up to date by logging your CPD activities.';
+
+// Add year callout
+$string['addyear']     = 'Add CPD year';
+$string['addyeardesc'] = 'CPD years are used as a tool to filter recorded CPD activities. New CPD years will need to be periodically added in accordance with your CPD calendar.';
 
 // Confirmation prompts
 $string['confirmdeleteofx'] = 'Are you sure you wish to delete "{$a}"?';

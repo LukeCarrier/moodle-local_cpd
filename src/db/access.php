@@ -54,5 +54,32 @@ $capabilities = array(
         ),
     ),
 
+    /*
+     * Manage activity types.
+     */
+    'local/cpd:manageactivitytypes' => array(
+        'captype'      => 'write',
+        'contextlevel' => CONTEXT_SYSTEM,
+
+        'archetypes' => array(
+            'manager' => CAP_ALLOW,
+        ),
+
+        'clonepermissionsfrom' => 'moodle/site:config',
+    ),
+
+    /*
+     * Manage CPD years.
+     */
+    'local/cpd:manageyears' => array(
+        'captype'      => 'write',
+        'contextlevel' => CONTEXT_SYSTEM,
+
+        'archetypes' => array(
+            'manager' => CAP_ALLOW,
+        ),
+
+        'clonepermissionsfrom' => 'moodle/site:config',
+    ),
 
 );

@@ -61,6 +61,17 @@ class year extends base_model {
     protected $enddate;
 
     /**
+     * Initialiser.
+     *
+     * @param integer $startdate
+     * @param integer $enddate
+     */
+    final public function __construct($startdate=null, $enddate=null) {
+        $this->startdate = $startdate;
+        $this->enddate   = $enddate;
+    }
+
+    /**
      * Find CPD years with start and end dates within the specified thresholds.
      *
      * @param integer $startdate The start date.
@@ -126,6 +137,13 @@ class year extends base_model {
      */
     final protected static function model_accessors() {
         return array();
+    }
+
+    /**
+     * @override \local_cpd\base_model
+     */
+    final public static function model_from_form($data) {
+        return new static($data->startdate, $data->enddate);
     }
 
     /**
