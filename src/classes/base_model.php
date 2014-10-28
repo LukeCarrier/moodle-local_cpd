@@ -232,8 +232,7 @@ abstract class base_model {
      *                           subclass.
      */
     protected static function model_accessors() {
-        throw new moodle_exception('model:incompleteimplementation',
-                                   'local_cpd');
+        static::model_throw_incomplete();
     }
 
     /**
@@ -266,8 +265,7 @@ abstract class base_model {
      *                           subclass.
      */
     protected static function model_fields() {
-        throw new moodle_exception('model:incompleteimplementation',
-                                   'local_cpd');
+        static::model_throw_incomplete();
     }
 
     /**
@@ -311,8 +309,7 @@ abstract class base_model {
      * @return \local_cpd\base_model A model object.
      */
     public static function model_from_form($data) {
-        throw new moodle_exception('model:incompleteimplementation',
-                                   'local_cpd');
+        static::model_throw_incomplete();
     }
 
     /**
@@ -340,6 +337,16 @@ abstract class base_model {
      */
     public static function model_primary_key() {
         return 'id';
+    }
+
+    /**
+     * Throw an "incomplete model" exception.
+     *
+     * @throw \moodle_exception Always.
+     */
+    protected static function model_throw_incomplete() {
+        throw new moodle_exception('model:incompleteimplementation',
+                                   'local_cpd', '', get_class());
     }
 
     /**
@@ -393,8 +400,7 @@ abstract class base_model {
      *                           subclass.
      */
     protected static function model_table() {
-        throw new moodle_exception('model:incompleteimplementation',
-                                   'local_cpd');
+        static::model_throw_incomplete();
     }
 
     /**
