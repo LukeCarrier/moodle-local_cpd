@@ -33,7 +33,8 @@ use local_cpd\util;
 require_once dirname(dirname(__DIR__)) . '/config.php';
 require_once __DIR__ . '/lib.php';
 
-$id = required_param('id', PARAM_INT);
+$id      = required_param('id',          PARAM_INT);
+$sesskey = optional_param('sesskey', '', PARAM_TEXT);
 
 $activity = activity::get_by_id($id);
 
@@ -56,7 +57,7 @@ $PAGE->set_url($deleteurl);
 
 util::normalise_navigation($user, util::ACTION_ACTIVITY_DELETE, $activity);
 
-if (confirm_sesskey()) {
+if ($sesskey && confirm_sesskey()) {
     $activity->delete();
     redirect($listurl);
 } else {
