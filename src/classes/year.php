@@ -63,10 +63,10 @@ class year extends base_model {
     /**
      * Find CPD years with start and end dates within the specified thresholds.
      *
-     * @param integer $startdate
-     * @param integer $enddate
+     * @param integer $startdate The start date.
+     * @param integer $enddate   The end date.
      *
-     * @return \local_cpd\year[]
+     * @return \local_cpd\year[] The matching CPD years.
      */
     final public static function find_between($startdate, $enddate) {
         return static::find_select('startdate > ? AND enddate < ?',
@@ -76,7 +76,7 @@ class year extends base_model {
     /**
      * Retrieve a menu of years.
      *
-     * @return string[]
+     * @return string[] An ID-indexed array of friendly date ranges.
      */
     final public static function menu() {
         $years = static::all('startdate');
