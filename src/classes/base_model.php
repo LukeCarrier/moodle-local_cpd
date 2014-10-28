@@ -63,6 +63,17 @@ abstract class base_model {
     }
 
     /**
+     * Check if a property's value has been set.
+     *
+     * @param string $property The name of the property to check.
+     *
+     * @return boolean True if the property's value has been set, else false.
+     */
+    final public function __isset($property) {
+        return ($this->{$property} !== null);
+    }
+
+    /**
      * Set a property's value.
      *
      * @param string $property The name of the property to set.
