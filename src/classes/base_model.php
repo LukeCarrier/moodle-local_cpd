@@ -45,6 +45,9 @@ abstract class base_model {
      * Get a property's value.
      *
      * @param string $property The name of the property to get.
+     *
+     * @return mixed The property's value.
+     *
      * @throws \moodle_exception Raises an exception on attempts to access
      *                           properties which aren't mapped to model fields.
      */
@@ -64,6 +67,8 @@ abstract class base_model {
      *
      * @param string $property The name of the property to set.
      * @param mixed  $value    The property's new value.
+     *
+     * @return void
      */
     final public function __set($property, $value) {
         $this->{$property} = $value;
@@ -75,6 +80,11 @@ abstract class base_model {
      * @param string  $method The static method that was called.
      * @param mixed[] The set of arguments that the static method was called
      *                with.
+     *
+     * @return mixed The return value of the called method.
+     *
+     * @throws \moodle_exception When passed a method name cannot be mapped to
+     *                           an appropriate method.
      */
     final public static function __callStatic($method, $arguments) {
         if ($field = util::starts_with($method, 'get_by_')) {
@@ -88,6 +98,9 @@ abstract class base_model {
 
     /**
      * Return all records in the table.
+     *
+     * @param string $sort Optional, the name of the field to sort the result
+     *                     set by.
      *
      * @return \local_cpd\base_model[] An array of model objects representing
      *                                 the records in the table.
@@ -120,10 +133,11 @@ abstract class base_model {
     /**
      * Find objects matching the given criteria.
      *
-     * @param mixed $criteria The criteria with which to populate a WHERE
-     *                        clause.
+     * @param mixed[] $criteria The criteria with which to populate a WHERE
+     *                          clause.
      *
-     * @return base_model[] An array of objects, all subclasses of base_model.
+     * @return \local_cpd\base_model[] An array of objects, all subclasses of
+     *                                 base_model.
      */
     final public static function find($criteria) {
         global $DB;
@@ -144,7 +158,8 @@ abstract class base_model {
      * @param mixed[] $params Parameters to substitute into the query.
      * @param string  $sort   SQL fragment to order the result set by.
      *
-     * @return base_model An array of objects, all subclasses of base_model.
+     * @return \local_cpd\base_model An array of objects, all subclasses of
+     *                               base_model.
      */
     final public static function find_select($select, $params=null, $sort=null) {
         global $DB;
@@ -163,10 +178,10 @@ abstract class base_model {
     /**
      * Get a single object matching the given criteria.
      *
-     * @param mixed $criteria The criteria with which to populate a WHERE
-     *                        clause.
+     * @param mixed $criteria[] The criteria with which to populate a WHERE
+     *                          clause.
      *
-     * @return base_model An individual model object.
+     * @return \local_cpd\base_model An individual model object.
      */
     final public static function get($criteria) {
         global $DB;
@@ -186,7 +201,7 @@ abstract class base_model {
      * @param string  $select A parameterised SQL string.
      * @param mixed[] $params Parameters to substitute into the query.
      *
-     * @return base_model An individual model object.
+     * @return \local_cpd\base_model An individual model object.
      */
     final public static function get_select($select, $params) {
         global $DB;
@@ -201,6 +216,7 @@ abstract class base_model {
      * Retrieve an array of model accessors.
      *
      * @return string[] The names of the accessors.
+     *
      * @throws \moodle_exception This static method must be implemented in a
      *                           subclass.
      */
@@ -214,7 +230,7 @@ abstract class base_model {
      *
      * @param string $accessor The name of the accessor we're checking.
      *
-     * @return bool True if the accessor exists, else false.
+     * @return boolean True if the accessor exists, else false.
      */
     final public static function model_has_accessor($accessor) {
         return in_array($accessor, static::model_accessors());
@@ -225,7 +241,7 @@ abstract class base_model {
      *
      * @param string $field The name of the field we're checking.
      *
-     * @return bool True if the field exists, else false.
+     * @return boolean True if the field exists, else false.
      */
     final public static function model_has_field($field) {
         return in_array($field, static::model_fields());
@@ -261,9 +277,9 @@ abstract class base_model {
     /**
      * Given an array of DML records, assemble model objects from all of them.
      *
-     * @param stdClass[] $records An array of DML record objects.
+     * @param \stdClass[] $records An array of DML record objects.
      *
-     * @return base_model[] An array of model objects.
+     * @return \local_cpd\base_model[] An array of model objects.
      */
     final public static function model_from_many_dml($records) {
         foreach ($records as $id => $record) {
@@ -372,6 +388,9 @@ abstract class base_model {
 
     /**
      * Save amendments to or a new record for the model.
+     *
+     * When saving a new record, the ID property of the model object will be set
+     * on save.
      *
      * @return void
      */
