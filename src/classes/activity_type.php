@@ -45,7 +45,7 @@ class activity_type extends base_model {
     protected $id;
 
     /**
-     * Status name.
+     * Activity type name.
      *
      * @var string
      */
