@@ -346,7 +346,7 @@ abstract class base_model {
      */
     protected static function model_throw_incomplete() {
         throw new moodle_exception('model:incompleteimplementation',
-                                   'local_cpd', '', get_class());
+                                   'local_cpd', '', get_called_class());
     }
 
     /**
