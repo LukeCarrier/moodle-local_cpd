@@ -107,7 +107,7 @@ class util {
             case static::ACTION_ACTIVITY_DELETE:
                 $PAGE->navbar->add(util::string('deletingx',
                                                 $activity->activity),
-                                   url_generator::delete_activitiy($activity->id));
+                                   url_generator::delete_activity($activity->id));
                 break;
 
             case static::ACTION_ACTIVITY_EDIT:
