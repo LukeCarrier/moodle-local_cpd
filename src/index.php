@@ -67,7 +67,7 @@ util::normalise_navigation($user, util::ACTION_REPORT_VIEW);
 $filterform = new activity_filter_form(null, null, 'get');
 $filterform->set_data(array('userid' => $user->id));
 
-$PAGE->requires->css(new moodle_url(url_generator::CPD_URL . '/style.css'));
+$PAGE->requires->css(url_generator::CPD_URL . '/style.css');
 
 $renderer = $PAGE->get_renderer('local_cpd');
 

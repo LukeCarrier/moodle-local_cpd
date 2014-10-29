@@ -42,7 +42,7 @@ admin_externalpage_setup('local_cpd_manageyears');
 $titlestr = util::string('manageyears');
 $PAGE->set_title($titlestr);
 
-$PAGE->requires->css(new moodle_url(url_generator::CPD_URL . '/style.css'));
+$PAGE->requires->css(url_generator::CPD_URL . '/style.css');
 
 $renderer = $PAGE->get_renderer('local_cpd');
 
