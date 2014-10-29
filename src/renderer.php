@@ -157,35 +157,32 @@ class local_cpd_renderer extends plugin_renderer_base {
     }
 
     /**
-     * Render CPD year action buttons
+     * Render CPD year table.
      *
      * @param \local_cpd\year[] $years     The array of year objects for which to
      *                                     render a table.
-     * @param string            $editurl
-     * @param string            $deleteurl 
+     * @param string            $editurl   The URL to link edit buttons to.
+     * @param string            $deleteurl The URL to link delete buttons to.
      *
      * @return string The generated HTML.
      */
     public function cpd_year_table($years, $editurl, $deleteurl) {
-        $table = new html_table();
-        $table->head = array(
+        $head = array(
             util::string('yearstart'),
             util::string('yearend'),
             util::string('actions', null, 'moodle'),
         );
 
-        $deleteicon = new action_link($deleteurl,
-                                      new pix_icon('t/delete', new lang_string('delete')));
-        $editicon   = new action_link($editurl,
-                                      new pix_icon('t/edit', new lang_string('edit')));
+        list($table, $editlink, $deletelink)
+                = $this->cpd_generic_table($head, $editurl, $deleteurl);
 
         foreach ($years as $year) {
-            $deleteicon->url->param('id', $year->id);
-            $editicon->url->param('id', $year->id);
+            $deletelink->url->param('id', $year->id);
+            $editlink->url->param('id', $year->id);
 
             $actionbuttons = $this->cpd_action_buttons(array(
-                $editicon,
-                $deleteicon,
+                $editlink,
+                $deletelink,
             ));
 
             $table->data[] = array(
