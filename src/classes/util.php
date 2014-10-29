@@ -90,33 +90,33 @@ class util {
         $PAGE->navbar->ignore_active();
 
         if ($user->id === $USER->id) {
-            $PAGE->navbar->add(util::string('myprofile', null, 'moodle'));
-            $PAGE->navbar->add(util::string('mycpd'), url_generator::index());
+            $PAGE->navbar->add(static::string('myprofile', null, 'moodle'));
+            $PAGE->navbar->add(static::string('mycpd'), url_generator::index());
         } else {
-            $PAGE->navbar->add(util::string('users', null, 'moodle'),
+            $PAGE->navbar->add(static::string('users', null, 'moodle'),
                                new moodle_url('/user/index.php',
                                               array('id' => $USER->id)));
             $PAGE->navbar->add(fullname($user),
                                new moodle_url('/user/profile.php',
                                               array('id' => $user->id)));
-            $PAGE->navbar->add(util::string('cpd'),
+            $PAGE->navbar->add(static::string('cpd'),
                                url_generator::index($user->id));
         }
 
         switch ($action) {
             case static::ACTION_ACTIVITY_DELETE:
-                $PAGE->navbar->add(util::string('deletingx',
+                $PAGE->navbar->add(static::string('deletingx',
                                                 $activity->activity),
                                    url_generator::delete_activity($activity->id));
                 break;
 
             case static::ACTION_ACTIVITY_EDIT:
-                $PAGE->navbar->add(util::string('editingx',
+                $PAGE->navbar->add(static::string('editingx',
                                    $activity->activity));
                 break;
 
             case static::ACTION_ACTIVITY_LOG:
-                $PAGE->navbar->add(util::string('logging'));
+                $PAGE->navbar->add(static::string('logging'));
                 break;
         }
     }
