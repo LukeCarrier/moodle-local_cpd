@@ -26,27 +26,31 @@
  * @license GPL v3
  */
 
+use local_cpd\activity_type;
+use local_cpd\url_generator;
 use local_cpd\util;
 
+require_once dirname(dirname(__DIR__)) . '/config.php';
+require_once "{$CFG->libdir}/adminlib.php";
 require_once __DIR__ . '/lib.php';
 
-defined('MOODLE_INTERNAL') || die;
+$editurl   = url_generator::edit_activity_type(null);
+$deleteurl = url_generator::delete_activity_type(null, sesskey());
 
-$ADMIN->add('localplugins', new admin_category(
-    'local_cpd',
-    util::string('cpd')
-));
+admin_externalpage_setup('local_cpd_manageactivitytypes');
 
-$ADMIN->add('local_cpd', new admin_externalpage(
-    'local_cpd_manageactivitytypes',
-    util::string('manageactivitytypes'),
-    new moodle_url('/local/cpd/manageactivitytypes.php'),
-    'local/cpd:manageactivitytypes'
-));
+$titlestr = util::string('manageactivitytypes');
+$PAGE->set_title($titlestr);
 
-$ADMIN->add('local_cpd', new admin_externalpage(
-    'local_cpd_manageyears',
-    util::string('manageyears'),
-    new moodle_url('/local/cpd/manageyears.php'),
-    'local/cpd:manageyears'
-));
+$PAGE->requires->css(url_generator::CPD_URL . '/style.css');
+
+$renderer = $PAGE->get_renderer('local_cpd');
+
+$activitytypes = activity_type::all();
+
+echo $OUTPUT->header(),
+     $OUTPUT->heading($titlestr),
+     $renderer->cpd_activity_type_table($activitytypes, $editurl, $deleteurl),
+     $renderer->cpd_callout(util::string('addactivitytypedesc'), $editurl,
+                            util::string('addactivitytype')),
+     $OUTPUT->footer();

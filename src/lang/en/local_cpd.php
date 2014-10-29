@@ -32,16 +32,18 @@ defined('MOODLE_INTERNAL') || die;
 $string['pluginname'] = 'CPD';
 
 // Menu items and page titles
-$string['cpd']                 = 'CPD';
-$string['cpdforx']             = '{$a}\'s CPD';
-$string['deletingx']           = 'Deleting "{$a}"';
-$string['editingx']            = 'Editing "{$a}"';
-$string['editingyearx']        = 'Editing year "{$a}"';
-$string['logging']             = 'Logging CPD activity';
-$string['loggingyear']         = 'Logging CPD year';
-$string['manageactivitytypes'] = 'Manage activity types';
-$string['manageyears']         = 'Manage CPD years';
-$string['mycpd']               = 'My CPD';
+$string['cpd']                  = 'CPD';
+$string['cpdforx']              = '{$a}\'s CPD';
+$string['deletingx']            = 'Deleting "{$a}"';
+$string['editingx']             = 'Editing "{$a}"';
+$string['editingactivitytypex'] = 'Editing activity type "{$a}"';
+$string['editingyearx']         = 'Editing CPD year "{$a}"';
+$string['logging']              = 'Logging CPD activity';
+$string['loggingactivitytype']  = 'Logging activity type';
+$string['loggingyear']          = 'Logging CPD year';
+$string['manageactivitytypes']  = 'Manage activity types';
+$string['manageyears']          = 'Manage CPD years';
+$string['mycpd']                = 'My CPD';
 
 // Activity table
 $string['activity']        = 'Activity';
@@ -67,6 +69,10 @@ $string['yeardaterange'] = '{$a->startdate} - {$a->enddate}';
 // Add activity callout
 $string['logactivity']    = 'Log CPD activity';
 $string['whylogactivity'] = 'Please ensure your CPD activity log is up to date by logging your CPD activities.';
+
+// Add activity type callout
+$string['addactivitytype']     = 'Add activity type';
+$string['addactivitytypedesc'] = 'Activity types allow you to control the types of activity which count towards CPD.';
 
 // Add year callout
 $string['addyear']     = 'Add CPD year';

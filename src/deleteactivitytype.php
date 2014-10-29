@@ -26,27 +26,37 @@
  * @license GPL v3
  */
 
+use local_cpd\activity_type;
+use local_cpd\url_generator;
 use local_cpd\util;
 
+require_once dirname(dirname(__DIR__)) . '/config.php';
+require_once "{$CFG->libdir}/adminlib.php";
 require_once __DIR__ . '/lib.php';
 
-defined('MOODLE_INTERNAL') || die;
+$id      = required_param('id',          PARAM_INT);
+$sesskey = optional_param('sesskey', '', PARAM_TEXT);
 
-$ADMIN->add('localplugins', new admin_category(
-    'local_cpd',
-    util::string('cpd')
-));
+$activitytype = activity_type::get_by_id($id);
 
-$ADMIN->add('local_cpd', new admin_externalpage(
-    'local_cpd_manageactivitytypes',
-    util::string('manageactivitytypes'),
-    new moodle_url('/local/cpd/manageactivitytypes.php'),
-    'local/cpd:manageactivitytypes'
-));
+admin_externalpage_setup('local_cpd_manageactivitytypes');
 
-$ADMIN->add('local_cpd', new admin_externalpage(
-    'local_cpd_manageyears',
-    util::string('manageyears'),
-    new moodle_url('/local/cpd/manageyears.php'),
-    'local/cpd:manageyears'
-));
+$deleteurl = url_generator::delete_activity_type($activitytype->id);
+$listurl   = url_generator::list_activity_type();
+
+$titlestr = util::string('deletingx', $activitytype->name);
+
+$PAGE->set_title($titlestr);
+$PAGE->set_url($deleteurl);
+
+if ($sesskey && confirm_sesskey()) {
+    $activitytype->delete();
+    redirect($listurl);
+} else {
+    $deleteurl->param('sesskey', sesskey());
+
+    echo $OUTPUT->header(),
+         $OUTPUT->confirm(util::string('confirmdeleteofx', $activitytype->name),
+                          $deleteurl, $listurl),
+         $OUTPUT->footer();
+}

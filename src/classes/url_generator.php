@@ -82,6 +82,21 @@ class url_generator {
     }
 
     /**
+     * Get activity type deletion URL.
+     *
+     * @param integer $activitytypeid The ID of the year to delete.
+     * @param string  $sesskey        The session key/nonce, for CSRF
+     *                                prevention.
+     *
+     * @return \moodle_url The activity type deletion URL.
+     */
+    public static function delete_activity_type($activitytypeid=null,
+                                                $sesskey=null) {
+        return static::delete('/deleteactivitytype.php', $activitytypeid,
+                              $sesskey);
+    }
+
+    /**
      * Get year deletion URL.
      *
      * @param integer $yearid  The ID of the year to delete.
@@ -118,6 +133,17 @@ class url_generator {
     }
 
     /**
+     * Get activity type edit URL.
+     *
+     * @param integer $activitytypeid The ID of the activity type to edit.
+     *
+     * @return \moodle_url The activity type edit URL.
+     */
+    public static function edit_activity_type($activitytypeid=null) {
+        return static::edit('/editactivitytype.php', $activitytypeid);
+    }
+
+    /**
      * Get year edit URL.
      *
      * @param integer $yearid The ID of the year to edit.
@@ -126,6 +152,15 @@ class url_generator {
      */
     public static function edit_year($yearid=null) {
         return static::edit('/edityear.php', $yearid);
+    }
+
+    /**
+     * Get activity type list URL.
+     *
+     * @return \moodle_url The activity type list URL.
+     */
+    public static function list_activity_type() {
+        return new moodle_url(static::CPD_URL . '/manageactivitytypes.php');
     }
 
     /**

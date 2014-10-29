@@ -26,27 +26,43 @@
  * @license GPL v3
  */
 
+use local_cpd\url_generator;
 use local_cpd\util;
+use local_cpd\activity_type;
+use local_cpd\activity_type_form;
 
+require_once dirname(dirname(__DIR__)) . '/config.php';
+require_once "{$CFG->libdir}/adminlib.php";
 require_once __DIR__ . '/lib.php';
 
-defined('MOODLE_INTERNAL') || die;
+admin_externalpage_setup('local_cpd_manageactivitytypes');
 
-$ADMIN->add('localplugins', new admin_category(
-    'local_cpd',
-    util::string('cpd')
-));
+$id = optional_param('id', 0, PARAM_INT);
 
-$ADMIN->add('local_cpd', new admin_externalpage(
-    'local_cpd_manageactivitytypes',
-    util::string('manageactivitytypes'),
-    new moodle_url('/local/cpd/manageactivitytypes.php'),
-    'local/cpd:manageactivitytypes'
-));
+$listurl = url_generator::list_activity_type();
 
-$ADMIN->add('local_cpd', new admin_externalpage(
-    'local_cpd_manageyears',
-    util::string('manageyears'),
-    new moodle_url('/local/cpd/manageyears.php'),
-    'local/cpd:manageyears'
-));
+if ($id) {
+    $activitytype = activity_type::get_by_id($id);
+    $titlestr     = util::string('editingactivitytypex', $activitytype->name);
+} else {
+    $activitytype = new activity_type();
+    $titlestr     = util::string('loggingactivitytype');
+}
+
+$mform = new activity_type_form();
+
+if ($mform->is_cancelled()) {
+    redirect($listurl);
+} elseif ($data = $mform->get_data()) {
+    $activitytype = activity_type::model_from_form($data);
+    $activitytype->id = ($id === 0) ? null : $id;
+    $activitytype->save();
+    redirect($listurl);
+} else {
+    $mform->set_data($activitytype->model_to_form());
+
+    echo $OUTPUT->header(),
+         $OUTPUT->heading($titlestr);
+    $mform->display();
+    echo $OUTPUT->footer();
+}

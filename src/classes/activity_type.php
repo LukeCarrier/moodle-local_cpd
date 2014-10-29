@@ -86,6 +86,13 @@ class activity_type extends base_model {
     /**
      * @override \local_cpd\base_model
      */
+    final public static function model_from_form($data) {
+        return new static($data->name);
+    }
+
+    /**
+     * @override \local_cpd\base_model
+     */
     final protected static function model_fields() {
         return array(
             'id',

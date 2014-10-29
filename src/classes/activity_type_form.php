@@ -26,27 +26,22 @@
  * @license GPL v3
  */
 
-use local_cpd\util;
+namespace local_cpd;
 
-require_once __DIR__ . '/lib.php';
+use moodleform;
 
 defined('MOODLE_INTERNAL') || die;
 
-$ADMIN->add('localplugins', new admin_category(
-    'local_cpd',
-    util::string('cpd')
-));
+class activity_type_form extends moodleform {
+    public function definition() {
+        $mform = $this->_form;
 
-$ADMIN->add('local_cpd', new admin_externalpage(
-    'local_cpd_manageactivitytypes',
-    util::string('manageactivitytypes'),
-    new moodle_url('/local/cpd/manageactivitytypes.php'),
-    'local/cpd:manageactivitytypes'
-));
+        $mform->addElement('hidden', 'id');
+        $mform->setType('id', PARAM_INT);
 
-$ADMIN->add('local_cpd', new admin_externalpage(
-    'local_cpd_manageyears',
-    util::string('manageyears'),
-    new moodle_url('/local/cpd/manageyears.php'),
-    'local/cpd:manageyears'
-));
+        $mform->addElement('text', 'name', util::string('activitytype'));
+        $mform->setType('name', PARAM_TEXT);
+
+        $this->add_action_buttons();
+    }
+}

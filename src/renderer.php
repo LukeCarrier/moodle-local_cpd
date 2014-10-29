@@ -156,6 +156,47 @@ class local_cpd_renderer extends plugin_renderer_base {
         return html_writer::table($table);
     }
 
+    /** 
+     * Render CPD activity type table.
+     *
+     * @param \local_cpd\activity_type[] $activity_types The array of
+     *                                                   activity_type objects
+     *                                                   for which to render a
+     *                                                   table.
+     * @param string                     $editurl        The URL to link edit
+     *                                                   buttons to.
+     * @param string                     $deleteurl      The URL to link delete
+     *                                                   buttons to.
+     *
+     * @return The generated HTML.
+     */
+    public function cpd_activity_type_table($activitytypes, $editurl,
+                                            $deleteurl) {
+        $head = array(
+            util::string('activitytype'),
+        );
+
+        list($table, $editlink, $deletelink)
+                = $this->cpd_generic_table($head, $editurl, $deleteurl);
+
+        foreach ($activitytypes as $activitytype) {
+            $deletelink->url->param('id', $activitytype->id);
+            $editlink->url->param('id', $activitytype->id);
+
+            $actionbuttons = $this->cpd_action_buttons(array(
+                $editlink,
+                $deletelink,
+            ));
+
+            $table->data[] = array(
+                $activitytype->name,
+                $actionbuttons,
+            );
+        }
+
+        return html_writer::table($table);
+    }
+
     /**
      * Render CPD year table.
      *
