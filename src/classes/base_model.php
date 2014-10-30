@@ -315,7 +315,7 @@ abstract class base_model {
     /**
      * Populate a model object from a DML record.
      *
-     * @param stdClass $record The DML record object.
+     * @param \stdClass $record The DML record object.
      *
      * @return void
      */
@@ -385,7 +385,7 @@ abstract class base_model {
     /**
      * model_to_dml(), but for moodleforms.
      *
-     * @return stdClass An object containing the moodleform values. Pass this to
+     * @return \stdClass An object containing the moodleform values. Pass this to
      *                  set_data().
      */
     public function model_to_form() {
