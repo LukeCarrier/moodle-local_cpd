@@ -32,21 +32,23 @@ require_once __DIR__ . '/lib.php';
 
 defined('MOODLE_INTERNAL') || die;
 
-$ADMIN->add('localplugins', new admin_category(
-    'local_cpd',
-    util::string('cpd')
-));
+if ($hassiteconfig) {
+    $ADMIN->add('localplugins', new admin_category(
+        'local_cpd',
+        util::string('cpd')
+    ));
 
-$ADMIN->add('local_cpd', new admin_externalpage(
-    'local_cpd_manageactivitytypes',
-    util::string('manageactivitytypes'),
-    new moodle_url('/local/cpd/manageactivitytypes.php'),
-    'local/cpd:manageactivitytypes'
-));
+    $ADMIN->add('local_cpd', new admin_externalpage(
+        'local_cpd_manageactivitytypes',
+        util::string('manageactivitytypes'),
+        new moodle_url('/local/cpd/manageactivitytypes.php'),
+        'local/cpd:manageactivitytypes'
+    ));
 
-$ADMIN->add('local_cpd', new admin_externalpage(
-    'local_cpd_manageyears',
-    util::string('manageyears'),
-    new moodle_url('/local/cpd/manageyears.php'),
-    'local/cpd:manageyears'
-));
+    $ADMIN->add('local_cpd', new admin_externalpage(
+        'local_cpd_manageyears',
+        util::string('manageyears'),
+        new moodle_url('/local/cpd/manageyears.php'),
+        'local/cpd:manageyears'
+    ));
+}
