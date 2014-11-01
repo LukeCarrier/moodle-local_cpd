@@ -46,7 +46,7 @@ $string['manageyears']          = 'Manage CPD years';
 $string['mycpd']                = 'My CPD';
 
 // Activity table
-$string['activity']        = 'Activity';
+$string['activity']        = 'Activity Description';
 $string['activitytype']    = 'Activity Type';
 $string['datedue']         = 'Due Date';
 $string['dateend']         = 'End Date';
