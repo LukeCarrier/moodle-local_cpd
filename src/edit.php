@@ -26,8 +26,10 @@
  * @license GPL v3
  */
 
-use local_cpd\model\activity;
+use local_cpd\event\activity_created;
+use local_cpd\event\activity_updated;
 use local_cpd\form\activity_form;
+use local_cpd\model\activity;
 use local_cpd\url_generator;
 use local_cpd\util;
 
@@ -95,6 +97,12 @@ if ($mform->is_cancelled()) {
     $activity = activity::model_from_form($data);
     $activity->id = ($id === 0) ? null : $id;
     $activity->save();
+
+    $event = ($id === 0)
+            ? activity_created::instance($activity, $context)
+            : activity_updated::instance($activity, $context);
+    $event->trigger();
+
     redirect($listurl);
 } else {
     $mform->set_data($activity->model_to_form());

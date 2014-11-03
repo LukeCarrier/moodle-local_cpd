@@ -88,5 +88,14 @@ $string['cpd:manageyears']         = 'Manage CPD years';
 $string['cpd:viewuserreport']      = 'View a user\'s CPD report';
 
 // Model exceptions
-$string['model:incompleteimplementation'] = 'Attempt to use model "{$a}" which is incomplete';
+$string['model:incompleteimplementation'] = 'Attempt to use model \'{$a}\' which is incomplete';
 $string['model:nosuchmethod']             = 'Attempt to call nonexistent method "$a"';
+
+// Event exceptions
+$string['event:incompleteimplementation'] = 'Attempt to use event \'{$a}\' which is incomplete';
+
+// Logging/events
+$string['event:activitycreated']     = 'CPD activity created';
+$string['event:activitycreateddesc'] = 'The user with ID \'{$a->userid}\' created a CPD activity with ID \'{$a->objectid}\' for subject with ID \'{$a->relateduserid}\'';
+$string['event:activityupdated']     = 'CPD activity updated';
+$string['event:activityupdateddesc'] = 'The user with ID \'{$a->userid}\' updated the CPD activity with ID \'{$a->objectid}\' for subject with ID \'{$a->relateduserid}\'';
