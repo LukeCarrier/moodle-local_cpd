@@ -55,18 +55,15 @@ class activity_updated extends activity_base {
      * @override \local_cpd\event\activity_created
      */
     public function get_description() {
-        return util::string('event:activityupdateddesc', (object) array(
-            'objectid'      => $this->objectid,
-            'relateduserid' => $this->relateduserid,
-            'userid'        => $this->userid,
-        ));
+        return util::string('event:activityupdateddesc',
+                            $this->get_description_subs());
     }
 
     /**
      * @override \local_cpd\event\activity_created
      */
     public function get_url() {
-        url_generator::edit_activity($this->objectid);
+        return url_generator::edit_activity($this->objectid);
     }
 
     /**

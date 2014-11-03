@@ -28,7 +28,6 @@
 
 namespace local_cpd\event;
 
-use local_cpd\model\activity;
 use local_cpd\url_generator;
 use local_cpd\util;
 
@@ -63,7 +62,7 @@ class activity_created extends activity_base {
      * @override \core\event\base
      */
     public function get_url() {
-        url_generator::edit_activity($this->objectid);
+        return url_generator::edit_activity($this->objectid);
     }
 
     /**
