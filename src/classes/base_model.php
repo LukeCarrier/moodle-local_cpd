@@ -341,7 +341,7 @@ abstract class base_model {
     /**
      * Throw an "incomplete model" exception.
      *
-     * @throw \moodle_exception Always.
+     * @throws \moodle_exception Always.
      */
     protected static function model_throw_incomplete() {
         throw new moodle_exception('model:incompleteimplementation',
