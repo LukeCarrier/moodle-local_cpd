@@ -53,6 +53,17 @@ abstract class activity_base extends base_event {
     /**
      * @override \local_cpd\base_event
      */
+    public function get_description_subs() {
+        $a = parent::get_description_subs();
+
+        $a->relateduserid = $this->relateduserid;
+        
+        return $a;
+    }
+
+    /**
+     * @override \local_cpd\base_event
+     */
     protected function init() {
         $this->data['edulevel'] = static::LEVEL_PARTICIPATING;
 

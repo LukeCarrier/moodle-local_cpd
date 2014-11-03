@@ -107,15 +107,13 @@ abstract class base_event extends base {
     /**
      * Get description substitutions.
      *
-     * @return \stdClass An object containing the objectid, relateduserid and
-     *                   userid properties for substitution into language
-     *                   strings.
+     * @return \stdClass An object containing the objectid and userid properties
+     *                   for substitution into language strings.
      */
     public function get_description_subs() {
         return (object) array(
-            'objectid'      => $this->objectid,
-            'relateduserid' => $this->relateduserid,
-            'userid'        => $this->userid,
+            'objectid' => $this->objectid,
+            'userid'   => $this->userid,
         );
     }
 
