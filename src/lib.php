@@ -45,10 +45,10 @@ function local_cpd_class_autoload($classname) {
     $namespacelength = strlen($namespace);
 
     if (substr($classname, 0, $namespacelength) === $namespace) {
-        $filename = __DIR__ . '/classes/' . substr($classname, 10) . '.php';
+        $filename = str_replace('\\', '/', substr($classname, 10)) . '.php';
 
         extract($GLOBALS);
-        include $filename;
+        include __DIR__ . '/classes/' . $filename;
     }
 }
 

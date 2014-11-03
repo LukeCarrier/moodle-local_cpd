@@ -26,8 +26,11 @@
  * @license GPL v3
  */
 
-namespace local_cpd;
+namespace local_cpd\form;
 
+use local_cpd\model\activity_status;
+use local_cpd\model\activity_type;
+use local_cpd\util;
 use moodleform;
 
 defined('MOODLE_INTERNAL') || die;

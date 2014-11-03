@@ -28,9 +28,8 @@
 
 namespace local_cpd;
 
-use stdClass;
-
 use moodle_exception;
+use stdClass;
 
 defined('MOODLE_INTERNAL') || die;
 

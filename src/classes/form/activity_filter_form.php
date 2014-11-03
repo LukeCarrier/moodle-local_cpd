@@ -26,27 +26,40 @@
  * @license GPL v3
  */
 
-namespace local_cpd;
+namespace local_cpd\form;
 
+use local_cpd\model\year;
+use local_cpd\util;
 use moodleform;
 
 defined('MOODLE_INTERNAL') || die;
 
-class year_form extends moodleform {
+require_once "{$CFG->libdir}/formslib.php";
+
+class activity_filter_form extends moodleform {
+    /**
+     * @override \moodleform
+     */
     public function definition() {
         $mform = $this->_form;
 
-        $mform->addElement('hidden', 'id');
-        $mform->setType('id', PARAM_INT);
+        $mform->addElement('hidden', 'userid');
+        $mform->setType('userid', PARAM_INT);
 
-        $mform->addElement('date_selector', 'startdate',
-                           util::string('yearstart'));
-        $mform->setType('startdate', PARAM_INT);
+        $select = $mform->addElement('select', 'filteryearids',
+                                     util::string('year'), year::menu());
+        $select->setMultiple(true);
+        $mform->setType('filteryearid', PARAM_INT);
+        
+        $mform->addElement('header', 'daterangefilters',
+                           util::string('filterby'));
+        $mform->addElement('date_selector', 'filteryearstartdate',
+                           util::string('datestart'),
+                           array('optional' => true));
+        $mform->addElement('date_selector', 'filteryearenddate',
+                           util::string('dateend'),
+                           array('optional' => true));
 
-        $mform->addElement('date_selector', 'enddate',
-                           util::string('yearend'));
-        $mform->setType('enddate', PARAM_INT);
-
-        $this->add_action_buttons();
+        $this->add_action_buttons(false, util::string('view', null, 'moodle'));
     }
 }

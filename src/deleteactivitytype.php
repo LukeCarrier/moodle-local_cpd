@@ -26,7 +26,7 @@
  * @license GPL v3
  */
 
-use local_cpd\activity_type;
+use local_cpd\model\activity_type;
 use local_cpd\url_generator;
 use local_cpd\util;
 

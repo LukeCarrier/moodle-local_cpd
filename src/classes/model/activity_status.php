@@ -26,17 +26,16 @@
  * @license GPL v3
  */
 
-namespace local_cpd;
+namespace local_cpd\model;
+
+use local_cpd\base_model;
 
 defined('MOODLE_INTERNAL') || die;
 
 /**
- * Activity type.
- *
- * Activity types are attached to activities, and define the type of activity
- * which occurred.
+ * CPD activity status.
  */
-class activity_type extends base_model {
+class activity_status extends base_model {
     /**
      * Record ID.
      *
@@ -45,32 +44,41 @@ class activity_type extends base_model {
     protected $id;
 
     /**
-     * Activity type name.
+     * Name.
      *
      * @var string
      */
     protected $name;
 
     /**
+     * Display order.
+     *
+     * @var integer
+     */
+    protected $display_order;
+
+    /**
      * Initialiser.
      *
-     * @param string $name The name of the activity.
+     * @param string  $name          Name.
+     * @param integer $display_order Display order.
      */
-    final public function __construct($name=null) {
-        $this->name = $name;
+    final public function __construct($name=null, $display_order=null) {
+        $this->name          = $name;
+        $this->display_order = $display_order;
     }
 
     /**
-     * Retrieve a menu of activity types.
+     * Retrieve a menu of activity statuses.
      *
      * @return string[]
      */
     final public static function menu() {
-        $activitytypes = static::all();
-        $menu          = array();
+        $activitystatuses = static::all('display_order');
+        $menu             = array();
 
-        foreach ($activitytypes as $activitytype) {
-            $menu[$activitytype->id] = $activitytype->name;
+        foreach ($activitystatuses as $activitystatus) {
+            $menu[$activitystatus->id] = $activitystatus->name;
         }
 
         return $menu;
@@ -79,31 +87,25 @@ class activity_type extends base_model {
     /**
      * @override \local_cpd\base_model
      */
-    final protected static function model_accessors() {
+    final public static function model_accessors() {
         return array();
     }
 
     /**
      * @override \local_cpd\base_model
      */
-    final public static function model_from_form($data) {
-        return new static($data->name);
-    }
-
-    /**
-     * @override \local_cpd\base_model
-     */
-    final protected static function model_fields() {
+    final public static function model_fields() {
         return array(
             'id',
             'name',
+            'display_order',
         );
     }
 
     /**
      * @override \local_cpd\base_model
      */
-    final protected static function model_table() {
-        return 'cpd_activity_type';
+    final public static function model_table() {
+        return 'cpd_status';
     }
 }

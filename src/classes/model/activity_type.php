@@ -26,11 +26,19 @@
  * @license GPL v3
  */
 
-namespace local_cpd;
+namespace local_cpd\model;
+
+use local_cpd\base_model;
 
 defined('MOODLE_INTERNAL') || die;
 
-class status extends base_model {
+/**
+ * Activity type.
+ *
+ * Activity types are attached to activities, and define the type of activity
+ * which occurred.
+ */
+class activity_type extends base_model {
     /**
      * Record ID.
      *
@@ -39,18 +47,36 @@ class status extends base_model {
     protected $id;
 
     /**
-     * Status name.
+     * Activity type name.
      *
      * @var string
      */
     protected $name;
 
     /**
-     * Sort order.
+     * Initialiser.
      *
-     * @var integer
+     * @param string $name The name of the activity.
      */
-    protected $display_order;
+    final public function __construct($name=null) {
+        $this->name = $name;
+    }
+
+    /**
+     * Retrieve a menu of activity types.
+     *
+     * @return string[]
+     */
+    final public static function menu() {
+        $activitytypes = static::all();
+        $menu          = array();
+
+        foreach ($activitytypes as $activitytype) {
+            $menu[$activitytype->id] = $activitytype->name;
+        }
+
+        return $menu;
+    }
 
     /**
      * @override \local_cpd\base_model
@@ -62,11 +88,17 @@ class status extends base_model {
     /**
      * @override \local_cpd\base_model
      */
+    final public static function model_from_form($data) {
+        return new static($data->name);
+    }
+
+    /**
+     * @override \local_cpd\base_model
+     */
     final protected static function model_fields() {
         return array(
             'id',
             'name',
-            'display_order',
         );
     }
 
@@ -74,6 +106,6 @@ class status extends base_model {
      * @override \local_cpd\base_model
      */
     final protected static function model_table() {
-        return 'cpd_status';
+        return 'cpd_activity_type';
     }
 }

@@ -28,8 +28,8 @@
 
 use local_cpd\url_generator;
 use local_cpd\util;
-use local_cpd\activity_type;
-use local_cpd\activity_type_form;
+use local_cpd\model\activity_type;
+use local_cpd\form\activity_type_form;
 
 require_once dirname(dirname(__DIR__)) . '/config.php';
 require_once "{$CFG->libdir}/adminlib.php";

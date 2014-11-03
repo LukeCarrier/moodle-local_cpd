@@ -26,7 +26,9 @@
  * @license GPL v3
  */
 
-namespace local_cpd;
+namespace local_cpd\model;
+
+use local_cpd\base_model;
 
 defined('MOODLE_INTERNAL') || die;
 
@@ -241,10 +243,10 @@ class activity extends base_model {
     /**
      * Get the status.
      *
-     * @return \local_cpd\status The CPD activity's status.
+     * @return \local_cpd\activity_status The CPD activity's status.
      */
     final protected function model_accessor_status() {
-        return status::get_by_id($this->statusid);
+        return activity_status::get_by_id($this->statusid);
     }
 
     /**

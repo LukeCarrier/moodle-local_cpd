@@ -28,7 +28,7 @@
 
 use local_cpd\url_generator;
 use local_cpd\util;
-use local_cpd\year;
+use local_cpd\model\year;
 
 require_once dirname(dirname(__DIR__)) . '/config.php';
 require_once "{$CFG->libdir}/adminlib.php";

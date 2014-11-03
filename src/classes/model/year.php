@@ -26,8 +26,10 @@
  * @license GPL v3
  */
 
-namespace local_cpd;
+namespace local_cpd\model;
 
+use local_cpd\base_model;
+use local_cpd\util;
 use userdate;
 
 defined('MOODLE_INTERNAL') || die;

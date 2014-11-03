@@ -26,12 +26,12 @@
  * @license GPL v3
  */
 
-use local_cpd\activity;
-use local_cpd\activity_filter_form;
-use local_cpd\activity_type;
+use local_cpd\model\activity;
+use local_cpd\form\activity_filter_form;
+use local_cpd\model\activity_type;
 use local_cpd\url_generator;
 use local_cpd\util;
-use local_cpd\year;
+use local_cpd\model\year;
 
 require_once dirname(dirname(__DIR__)) . '/config.php';
 require_once __DIR__ . '/lib.php';
