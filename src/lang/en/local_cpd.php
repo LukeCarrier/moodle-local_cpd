@@ -109,3 +109,11 @@ $string['event:activitytypedeleted']     = 'CPD activity type deleted';
 $string['event:activitytypedeleteddesc'] = 'The user with ID \'{$a->userid}\' deleted the CPD activity type with ID \'{$a->objectid}\'';
 $string['event:activitytypeupdated']     = 'CPD activity type updated';
 $string['event:activitytypeupdateddesc'] = 'The user with ID \'{$a->userid}\' updated the CPD activity type with ID \'{$a->objectid}\'';
+
+// CPD year events
+$string['event:yearcreated']     = 'CPD year created';
+$string['event:yearcreateddesc'] = 'The user with ID \'{$a->userid}\' created a CPD year with ID \'{$a->objectid}\'';
+$string['event:yeardeleted']     = 'CPD year deleted';
+$string['event:yeardeleteddesc'] = 'The user with ID \'{$a->userid}\' deleted the CPD year with ID \'{$a->objectid}\'';
+$string['event:yearupdated']     = 'CPD year updated';
+$string['event:yearupdateddesc'] = 'The user with ID \'{$a->userid}\' updated the CPD year with ID \'{$a->objectid}\'';

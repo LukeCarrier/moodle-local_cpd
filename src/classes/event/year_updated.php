@@ -26,42 +26,51 @@
  * @license GPL v3
  */
 
-use local_cpd\event\year_deleted;
-use local_cpd\model\year;
+namespace local_cpd\event;
+
 use local_cpd\url_generator;
 use local_cpd\util;
 
-require_once dirname(dirname(__DIR__)) . '/config.php';
-require_once "{$CFG->libdir}/adminlib.php";
-require_once __DIR__ . '/lib.php';
+defined('MOODLE_INTERNAL') || die;
 
-$id      = required_param('id',          PARAM_INT);
-$sesskey = optional_param('sesskey', '', PARAM_TEXT);
+class year_updated extends year_base {
+    /**
+     * @override \local_cpd\base_event
+     */
+    public static function get_name() {
+        return util::string('event:yearupdated');
+    }
 
-$year          = year::get_by_id($id);
-$yeardaterange = $year->get_friendly_range();
+    /**
+     * @override \local_cpd\base_event
+     */
+    protected function init() {
+        parent::init();
 
-admin_externalpage_setup('local_cpd_manageyears');
+        $this->data['crud'] = 'u';
+    }
 
-$deleteurl = url_generator::delete_year($year->id);
-$listurl   = url_generator::list_year();
+    /**
+     * @override \local_cpd\base_event
+     */
+    public function get_description() {
+        return util::string('event:yearupdateddesc',
+                            $this->get_description_subs());
+    }
 
-$titlestr = util::string('deletingx', $yeardaterange);
+    /**
+     * @override \local_cpd\base_event
+     */
+    public function get_legacy_logdata() {
+        return array_merge(parent::get_legacy_logdata(), array(
+            static::LEGACY_LOGDATA_ACTION => 'cpd year update',
+        ));
+    }
 
-$PAGE->set_title($titlestr);
-$PAGE->set_url($deleteurl);
-
-if ($sesskey && confirm_sesskey()) {
-    $year->delete();
-
-    year_deleted::instance($year)->trigger();
-
-    redirect($listurl);
-} else {
-    $deleteurl->param('sesskey', sesskey());
-
-    echo $OUTPUT->header(),
-         $OUTPUT->confirm(util::string('confirmdeleteofx', $yeardaterange),
-                          $deleteurl, $listurl),
-         $OUTPUT->footer();
+    /**
+     * @override \local_cpd\base_event
+     */
+    public function get_url() {
+        return url_generator::edit_year($this->objectid);
+    }
 }

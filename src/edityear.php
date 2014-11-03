@@ -26,10 +26,12 @@
  * @license GPL v3
  */
 
+use local_cpd\event\year_created;
+use local_cpd\event\year_updated;
+use local_cpd\form\year_form;
+use local_cpd\model\year;
 use local_cpd\url_generator;
 use local_cpd\util;
-use local_cpd\model\year;
-use local_cpd\form\year_form;
 
 require_once dirname(dirname(__DIR__)) . '/config.php';
 require_once "{$CFG->libdir}/adminlib.php";
@@ -57,6 +59,12 @@ if ($mform->is_cancelled()) {
     $year = year::model_from_form($data);
     $year->id = ($id === 0) ? null : $id;
     $year->save();
+
+    $event = ($id === 0)
+            ? year_created::instance($year)
+            : year_updated::instance($year);
+    $event->trigger();
+
     redirect($listurl);
 } else {
     $mform->set_data($year->model_to_form());
