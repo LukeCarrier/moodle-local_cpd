@@ -94,10 +94,18 @@ $string['model:nosuchmethod']             = 'Attempt to call nonexistent method 
 // Event exceptions
 $string['event:incompleteimplementation'] = 'Attempt to use event \'{$a}\' which is incomplete';
 
-// Logging/events
+// CPD activity events
 $string['event:activitycreated']     = 'CPD activity created';
 $string['event:activitycreateddesc'] = 'The user with ID \'{$a->userid}\' created a CPD activity with ID \'{$a->objectid}\' for subject with ID \'{$a->relateduserid}\'';
 $string['event:activitydeleted']     = 'CPD activity deleted';
 $string['event:activitydeleteddesc'] = 'The user with ID \'{$a->userid}\' deleted the CPD activity with ID \'{$a->objectid}\' for subject with ID \'{$a->relateduserid}\'';
 $string['event:activityupdated']     = 'CPD activity updated';
 $string['event:activityupdateddesc'] = 'The user with ID \'{$a->userid}\' updated the CPD activity with ID \'{$a->objectid}\' for subject with ID \'{$a->relateduserid}\'';
+
+// CPD activity type events
+$string['event:activitytypecreated']     = 'CPD activity type created';
+$string['event:activitytypecreateddesc'] = 'The user with ID \'{$a->userid}\' created a CPD activity type with ID \'{$a->objectid}\'';
+$string['event:activitytypedeleted']     = 'CPD activity type deleted';
+$string['event:activitytypedeleteddesc'] = 'The user with ID \'{$a->userid}\' deleted the CPD activity type with ID \'{$a->objectid}\'';
+$string['event:activitytypeupdated']     = 'CPD activity type updated';
+$string['event:activitytypeupdateddesc'] = 'The user with ID \'{$a->userid}\' updated the CPD activity type with ID \'{$a->objectid}\'';

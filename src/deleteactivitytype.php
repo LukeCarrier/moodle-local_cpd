@@ -26,6 +26,7 @@
  * @license GPL v3
  */
 
+use local_cpd\event\activity_type_deleted;
 use local_cpd\model\activity_type;
 use local_cpd\url_generator;
 use local_cpd\util;
@@ -51,6 +52,9 @@ $PAGE->set_url($deleteurl);
 
 if ($sesskey && confirm_sesskey()) {
     $activitytype->delete();
+
+    activity_type_deleted::instance($activitytype)->trigger();
+
     redirect($listurl);
 } else {
     $deleteurl->param('sesskey', sesskey());

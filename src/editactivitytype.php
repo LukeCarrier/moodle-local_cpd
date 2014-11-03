@@ -26,10 +26,12 @@
  * @license GPL v3
  */
 
+use local_cpd\event\activity_type_created;
+use local_cpd\event\activity_type_updated;
+use local_cpd\form\activity_type_form;
+use local_cpd\model\activity_type;
 use local_cpd\url_generator;
 use local_cpd\util;
-use local_cpd\model\activity_type;
-use local_cpd\form\activity_type_form;
 
 require_once dirname(dirname(__DIR__)) . '/config.php';
 require_once "{$CFG->libdir}/adminlib.php";
@@ -57,6 +59,12 @@ if ($mform->is_cancelled()) {
     $activitytype = activity_type::model_from_form($data);
     $activitytype->id = ($id === 0) ? null : $id;
     $activitytype->save();
+
+    $event = ($id === 0)
+            ? activity_type_created::instance($activitytype)
+            : activity_type_updated::instance($activitytype);
+    $event->trigger();
+
     redirect($listurl);
 } else {
     $mform->set_data($activitytype->model_to_form());
