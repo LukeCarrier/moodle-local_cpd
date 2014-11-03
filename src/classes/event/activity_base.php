@@ -37,7 +37,7 @@ abstract class activity_base extends base_event {
     /**
      * Rapidly instantiate the event.
      *
-     * @param \local_cpd\model\activity $activity The created CPD activity.
+     * @param \local_cpd\model\activity $activity The affected CPD activity.
      * @param \context_user             $context  The parent user's context.
      *
      * @return \local_cpd\event\activity_created The event.
@@ -51,33 +51,11 @@ abstract class activity_base extends base_event {
     }
 
     /**
-     * @override \core\event\base
-     */
-    public static function get_name() {
-        static::event_throw_incomplete();
-    }
-
-    /**
-     * @override \core\event\base
+     * @override \local_cpd\base_event
      */
     protected function init() {
         $this->data['edulevel'] = static::LEVEL_PARTICIPATING;
 
         $this->data['objecttable'] = activity::model_table();
-    }
-
-    /**
-     * Get description substitutions.
-     *
-     * @return \stdClass An object containing the objectid, relateduserid and
-     *                   userid properties for substitution into language
-     *                   strings.
-     */
-    final public function get_description_subs() {
-        return (object) array(
-            'objectid'      => $this->objectid,
-            'relateduserid' => $this->relateduserid,
-            'userid'        => $this->userid,
-        );
     }
 }

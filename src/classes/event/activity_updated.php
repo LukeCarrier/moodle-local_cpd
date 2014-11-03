@@ -36,14 +36,14 @@ defined('MOODLE_INTERNAL') || die;
 
 class activity_updated extends activity_base {
     /**
-     * @override \local_cpd\event\activity_created
+     * @override \local_cpd\base_event
      */
     public static function get_name() {
         return util::string('event:activityupdated');
     }
 
     /**
-     * @override \local_cpd\event\activity_created
+     * @override \local_cpd\base_event
      */
     protected function init() {
         parent::init();
@@ -52,7 +52,7 @@ class activity_updated extends activity_base {
     }
 
     /**
-     * @override \local_cpd\event\activity_created
+     * @override \local_cpd\base_event
      */
     public function get_description() {
         return util::string('event:activityupdateddesc',
@@ -60,23 +60,18 @@ class activity_updated extends activity_base {
     }
 
     /**
-     * @override \local_cpd\event\activity_created
+     * @override \local_cpd\base_event
      */
-    public function get_url() {
-        return url_generator::edit_activity($this->objectid);
+    public function get_legacy_logdata() {
+        return array_merge(parent::get_legacy_logdata(), array(
+            static::LEGACY_LOGDATA_ACTION => 'cpd activity update',
+        ));
     }
 
     /**
-     * @override \local_cpd\event\activity_created
+     * @override \local_cpd\base_event
      */
-    public function get_legacy_logdata() {
-        return array(
-            /* Course ID       */ get_site()->id,
-            /* Plugin name     */ 'local_cpd',
-            /* Log action      */ 'cpd activity update',
-            /* URL             */ $this->get_url(),
-            /* Additional info */ $this->get_description(),
-            /* User ID         */ $this->userid,
-        );
+    public function get_url() {
+        return url_generator::edit_activity($this->objectid);
     }
 }
