@@ -41,12 +41,12 @@ class activity_type_base extends base_event {
      * @param \local_cpd\model\activity_type $activitytype The affected CPD
      *                                                     activity type.
      *
-     * @return \local_cpd\event\activity_created The event.
+     * @return \local_cpd\event\activity_type_base The event.
      */
     final public static function instance($activitytype) {
         return static::create(array(
-            'objectid'      => $activitytype->id,
-            'context'       => context_system::instance(),
+            'objectid' => $activitytype->id,
+            'context'  => context_system::instance(),
         ));
     }
 

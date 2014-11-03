@@ -40,7 +40,7 @@ abstract class activity_base extends base_event {
      * @param \local_cpd\model\activity $activity The affected CPD activity.
      * @param \context_user             $context  The parent user's context.
      *
-     * @return \local_cpd\event\activity_created The event.
+     * @return \local_cpd\event\activity_base The event.
      */
     final public static function instance($activity, $context) {
         return static::create(array(
