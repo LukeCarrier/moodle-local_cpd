@@ -34,7 +34,7 @@ use local_cpd\model\year;
 
 defined('MOODLE_INTERNAL') || die;
 
-class year_base extends base_event {
+abstract class year_base extends base_event {
     /**
      * Rapidly instantiate the event.
      *

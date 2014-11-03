@@ -34,7 +34,7 @@ use local_cpd\model\activity_type;
 
 defined('MOODLE_INTERNAL') || die;
 
-class activity_type_base extends base_event {
+abstract class activity_type_base extends base_event {
     /**
      * Rapidly instantiate the event.
      *
