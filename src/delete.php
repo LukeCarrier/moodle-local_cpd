@@ -26,6 +26,7 @@
  * @license GPL v3
  */
 
+use local_cpd\event\activity_deleted;
 use local_cpd\model\activity;
 use local_cpd\url_generator;
 use local_cpd\util;
@@ -59,6 +60,9 @@ util::normalise_navigation($user, util::ACTION_ACTIVITY_DELETE, $activity);
 
 if ($sesskey && confirm_sesskey()) {
     $activity->delete();
+
+    activity_deleted::instance($activity, $context)->trigger();
+
     redirect($listurl);
 } else {
     $deleteurl->param('sesskey', sesskey());
