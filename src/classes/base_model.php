@@ -263,7 +263,7 @@ abstract class base_model {
      * @throws \moodle_exception This static method must be implemented in a
      *                           subclass.
      */
-    protected static function model_fields() {
+    public static function model_fields() {
         static::model_throw_incomplete();
     }
 
@@ -398,7 +398,7 @@ abstract class base_model {
      * @throws \moodle_exception This static method must be implemented in a
      *                           subclass.
      */
-    protected static function model_table() {
+    public static function model_table() {
         static::model_throw_incomplete();
     }
 

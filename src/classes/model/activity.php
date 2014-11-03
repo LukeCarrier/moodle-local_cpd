@@ -286,7 +286,7 @@ class activity extends base_model {
     /**
      * @override \local_cpd\base_model
      */
-    final protected static function model_fields() {
+    final public static function model_fields() {
         return array(
             'id',
             'userid',
@@ -308,7 +308,7 @@ class activity extends base_model {
     /**
      * @override \local_cpd\base_model
      */
-    final protected static function model_table() {
+    final public static function model_table() {
         return 'cpd';
     }
 }
