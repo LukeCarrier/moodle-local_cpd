@@ -109,7 +109,7 @@ class local_cpd_renderer extends plugin_renderer_base {
             util::string('datedue'),
             util::string('datestart'),
             util::string('dateend'),
-            util::string('status'),
+            util::string('activitystatus'),
             util::string('timetaken'),
             new lang_string('actions'),
         );

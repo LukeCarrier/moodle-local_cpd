@@ -50,8 +50,7 @@ $statuses = activity_status::all();
 
 echo $OUTPUT->header(),
      $OUTPUT->heading($titlestr),
-     $renderer->cpd_generic_named_item_table(util::string('status'), 'name',
-                                             $statuses, $editurl, $deleteurl),
+     $renderer->cpd_activity_status_table($statuses, $editurl, $deleteurl),
      $renderer->cpd_callout(util::string('addactivitystatusdesc'), $editurl,
                             util::string('addactivitystatus')),
      $OUTPUT->footer();

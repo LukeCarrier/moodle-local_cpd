@@ -72,7 +72,7 @@ class activity_form extends moodleform {
                            util::string('dateend'));
         $mform->setType('enddate', PARAM_INT);
 
-        $mform->addElement('select', 'status', util::string('status'),
+        $mform->addElement('select', 'status', util::string('activitystatus'),
                            activity_status::menu());
         $mform->setType('status', PARAM_INT);
 

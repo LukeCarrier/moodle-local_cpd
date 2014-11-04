@@ -50,6 +50,7 @@ $string['mycpd']                  = 'My CPD';
 
 // Activity table
 $string['activity']        = 'Activity Description';
+$string['activitystatus']  = 'Activity Status';
 $string['activitytype']    = 'Activity Type';
 $string['datedue']         = 'Due Date';
 $string['dateend']         = 'End Date';
@@ -57,7 +58,6 @@ $string['datestart']       = 'Start Date';
 $string['developmentneed'] = 'Development Need';
 $string['nocpdactivities'] = 'There are no activities to display.';
 $string['objective']       = 'Objective';
-$string['status']          = 'Status';
 $string['timetaken']       = 'Time Taken';
 
 // Year management table
