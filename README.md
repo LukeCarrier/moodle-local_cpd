@@ -8,7 +8,7 @@ Allows Moodle users to log their CPD via their user profiles.
 License
 -------
 
-    Copyright (c) The Development Manager Ltd
+    Copyright (c) Luke Carrier, The Development Manager Ltd
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
