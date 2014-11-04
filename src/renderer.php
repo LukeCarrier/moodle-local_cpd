@@ -26,7 +26,6 @@
  * @license GPL v3
  */
 
-use local_cpd\url_generator;
 use local_cpd\util;
 
 defined('MOODLE_INTERNAL') || die;
@@ -115,9 +114,6 @@ class local_cpd_renderer extends plugin_renderer_base {
             new lang_string('actions'),
         );
 
-        $deleteurl = url_generator::delete_activity(null, sesskey());
-        $editurl   = url_generator::edit_activity(null);
-
         list($table, $editlink, $deletelink)
                 = $this->cpd_generic_table($head, $editurl, $deleteurl);
 
@@ -156,32 +152,79 @@ class local_cpd_renderer extends plugin_renderer_base {
         return html_writer::table($table);
     }
 
-    /** 
+    /**
+     * Render CPD activity status table.
+     *
+     * @param \local_cpd\activity_status[] $activitystatuses The array of
+     *                                                       activity_status
+     *                                                       objects for which
+     *                                                       to render a table.
+     * @param \moodle_url                  $editurl          The URL to link
+     *                                                       edit buttons to.
+     * @param \moodle_url                  $deleteurl        The URL to link
+     *                                                       delete buttons to.
+     *
+     * @return The generated HTML.
+     */
+    public function cpd_activity_status_table($activitystatuses, $editurl,
+                                              $deleteurl) {
+        return $this->cpd_generic_named_item_table('name',
+                                                   util::string('activitystatus'),
+                                                   $activitystatuses, $editurl,
+                                                   $deleteurl);
+    }
+
+    /**
      * Render CPD activity type table.
      *
-     * @param \local_cpd\activity_type[] $activity_types The array of
-     *                                                   activity_type objects
-     *                                                   for which to render a
-     *                                                   table.
-     * @param string                     $editurl        The URL to link edit
-     *                                                   buttons to.
-     * @param string                     $deleteurl      The URL to link delete
-     *                                                   buttons to.
+     * @param \local_cpd\activity_type[] $activitytypes The array of
+     *                                                  activity_type objects
+     *                                                  for which to render a
+     *                                                  table.
+     * @param \moodle_url                $editurl       The URL to link edit
+     *                                                  buttons to.
+     * @param \moodle_url                $deleteurl     The URL to link delete
+     *                                                  buttons to.
      *
      * @return The generated HTML.
      */
     public function cpd_activity_type_table($activitytypes, $editurl,
                                             $deleteurl) {
+        return $this->cpd_generic_named_item_table('name',
+                                                   util::string('activitytype'),
+                                                   $activitytypes, $editurl,
+                                                   $deleteurl);
+    }
+
+    /**
+     * Render generic CPD named item table.
+     *
+     * @param string                  $nameproperty The name of the property on
+     *                                              each object which contains
+     *                                              the desired name value.
+     * @param string                  $namestring   A human-readable string for
+     *                                              the table's header.
+     * @param \local_cpd\base_model[] $items        The items which should
+     *                                              populate the table's body.
+     * @param \moodle_url             $editurl      The URL to link edit buttons
+     *                                              to.
+     * @param \moodle_url             $deleteurl    The URL to link delete
+     *                                              buttons to.
+     *
+     * @return The generated HTML.
+     */
+    public function cpd_generic_named_item_table($nameproperty, $namestring,
+                                                 $items, $editurl, $deleteurl) {
         $head = array(
-            util::string('activitytype'),
+            $namestring,
         );
 
         list($table, $editlink, $deletelink)
                 = $this->cpd_generic_table($head, $editurl, $deleteurl);
 
-        foreach ($activitytypes as $activitytype) {
-            $deletelink->url->param('id', $activitytype->id);
-            $editlink->url->param('id', $activitytype->id);
+        foreach ($items as $item) {
+            $deletelink->url->param('id', $item->id);
+            $editlink->url->param('id', $item->id);
 
             $actionbuttons = $this->cpd_action_buttons(array(
                 $editlink,
@@ -189,7 +232,7 @@ class local_cpd_renderer extends plugin_renderer_base {
             ));
 
             $table->data[] = array(
-                $activitytype->name,
+                $item->name,
                 $actionbuttons,
             );
         }

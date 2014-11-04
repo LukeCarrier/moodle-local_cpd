@@ -26,36 +26,36 @@
  * @license GPL v3
  */
 
-use local_cpd\util;
+namespace local_cpd\event;
 
-require_once __DIR__ . '/lib.php';
+use context_system;
+use local_cpd\base_event;
+use local_cpd\model\activity_status;
 
 defined('MOODLE_INTERNAL') || die;
 
-if ($hassiteconfig) {
-    $ADMIN->add('localplugins', new admin_category(
-        'local_cpd',
-        util::string('cpd')
-    ));
+abstract class activity_status_base extends base_event {
+    /**
+     * Rapidly instantiate the event.
+     *
+     * @param \local_cpd\model\activity_status $activitytype The affected CPD
+     *                                                     activity type.
+     *
+     * @return \local_cpd\event\activity_status_base The event.
+     */
+    final public static function instance($activitytype) {
+        return static::create(array(
+            'objectid' => $activitytype->id,
+            'context'  => context_system::instance(),
+        ));
+    }
 
-    $ADMIN->add('local_cpd', new admin_externalpage(
-        'local_cpd_manageactivitytypes',
-        util::string('manageactivitytypes'),
-        new moodle_url('/local/cpd/manageactivitytypes.php'),
-        'local/cpd:manageactivitytypes'
-    ));
+    /**
+     * @override \core\event\base
+     */
+    protected function init() {
+        $this->data['edulevel'] = static::LEVEL_OTHER;
 
-    $ADMIN->add('local_cpd', new admin_externalpage(
-        'local_cpd_manageactivitystatuses',
-        util::string('manageactivitystatuses'),
-        new moodle_url('/local/cpd/manageactivitystatuses.php'),
-        'local/cpd:manageactivitystatuses'
-    ));
-
-    $ADMIN->add('local_cpd', new admin_externalpage(
-        'local_cpd_manageyears',
-        util::string('manageyears'),
-        new moodle_url('/local/cpd/manageyears.php'),
-        'local/cpd:manageyears'
-    ));
+        $this->data['objecttable'] = activity_status::model_table();
+    }
 }

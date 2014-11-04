@@ -26,36 +26,32 @@
  * @license GPL v3
  */
 
+use local_cpd\model\activity_status;
+use local_cpd\url_generator;
 use local_cpd\util;
 
+require_once dirname(dirname(__DIR__)) . '/config.php';
+require_once "{$CFG->libdir}/adminlib.php";
 require_once __DIR__ . '/lib.php';
 
-defined('MOODLE_INTERNAL') || die;
+$editurl   = url_generator::edit_activity_status(null);
+$deleteurl = url_generator::delete_activity_status(null, sesskey());
 
-if ($hassiteconfig) {
-    $ADMIN->add('localplugins', new admin_category(
-        'local_cpd',
-        util::string('cpd')
-    ));
+admin_externalpage_setup('local_cpd_manageactivitystatuses');
 
-    $ADMIN->add('local_cpd', new admin_externalpage(
-        'local_cpd_manageactivitytypes',
-        util::string('manageactivitytypes'),
-        new moodle_url('/local/cpd/manageactivitytypes.php'),
-        'local/cpd:manageactivitytypes'
-    ));
+$titlestr = util::string('manageactivitystatuses');
+$PAGE->set_title($titlestr);
 
-    $ADMIN->add('local_cpd', new admin_externalpage(
-        'local_cpd_manageactivitystatuses',
-        util::string('manageactivitystatuses'),
-        new moodle_url('/local/cpd/manageactivitystatuses.php'),
-        'local/cpd:manageactivitystatuses'
-    ));
+$PAGE->requires->css(url_generator::CPD_URL . '/style.css');
 
-    $ADMIN->add('local_cpd', new admin_externalpage(
-        'local_cpd_manageyears',
-        util::string('manageyears'),
-        new moodle_url('/local/cpd/manageyears.php'),
-        'local/cpd:manageyears'
-    ));
-}
+$renderer = $PAGE->get_renderer('local_cpd');
+
+$statuses = activity_status::all();
+
+echo $OUTPUT->header(),
+     $OUTPUT->heading($titlestr),
+     $renderer->cpd_generic_named_item_table(util::string('status'), 'name',
+                                             $statuses, $editurl, $deleteurl),
+     $renderer->cpd_callout(util::string('addactivitystatusdesc'), $editurl,
+                            util::string('addactivitystatus')),
+     $OUTPUT->footer();

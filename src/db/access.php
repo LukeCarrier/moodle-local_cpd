@@ -69,6 +69,20 @@ $capabilities = array(
     ),
 
     /*
+     * Manage statuses.
+     */
+    'local/cpd:manageactivitystatuses' => array(
+        'captype'      => 'write',
+        'contextlevel' => CONTEXT_SYSTEM,
+
+        'archetypes' => array(
+            'manager' => CAP_ALLOW,
+        ),
+
+        'clonepermissionsfrom' => 'moodle/site:config',
+    ),
+
+    /*
      * Manage CPD years.
      */
     'local/cpd:manageyears' => array(

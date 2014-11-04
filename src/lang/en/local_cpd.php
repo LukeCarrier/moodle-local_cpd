@@ -32,18 +32,21 @@ defined('MOODLE_INTERNAL') || die;
 $string['pluginname'] = 'CPD';
 
 // Menu items and page titles
-$string['cpd']                  = 'CPD';
-$string['cpdforx']              = '{$a}\'s CPD';
-$string['deletingx']            = 'Deleting "{$a}"';
-$string['editingx']             = 'Editing "{$a}"';
-$string['editingactivitytypex'] = 'Editing activity type "{$a}"';
-$string['editingyearx']         = 'Editing CPD year "{$a}"';
-$string['logging']              = 'Logging CPD activity';
-$string['loggingactivitytype']  = 'Logging activity type';
-$string['loggingyear']          = 'Logging CPD year';
-$string['manageactivitytypes']  = 'Manage activity types';
-$string['manageyears']          = 'Manage CPD years';
-$string['mycpd']                = 'My CPD';
+$string['cpd']                    = 'CPD';
+$string['cpdforx']                = '{$a}\'s CPD';
+$string['deletingx']              = 'Deleting \'{$a}\'';
+$string['editingx']               = 'Editing \'{$a}\'';
+$string['editingactivitystatusx'] = 'Editing activity status \'{$a}\'';
+$string['editingactivitytypex']   = 'Editing activity type \'{$a}\'';
+$string['editingyearx']           = 'Editing CPD year \'{$a}\'';
+$string['logging']                = 'Logging CPD activity';
+$string['loggingactivitytype']    = 'Logging activity type';
+$string['loggingactivitystatus']  = 'Logging activity status';
+$string['loggingyear']            = 'Logging CPD year';
+$string['manageactivitytypes']    = 'Manage activity types';
+$string['manageactivitystatuses'] = 'Manage activity statuses';
+$string['manageyears']            = 'Manage CPD years';
+$string['mycpd']                  = 'My CPD';
 
 // Activity table
 $string['activity']        = 'Activity Description';
@@ -70,6 +73,10 @@ $string['yeardaterange'] = '{$a->startdate} - {$a->enddate}';
 $string['logactivity']    = 'Log CPD activity';
 $string['whylogactivity'] = 'Please ensure your CPD activity log is up to date by logging your CPD activities.';
 
+// Add activity status callout
+$string['addactivitystatus']     = 'Add activity status';
+$string['addactivitystatusdesc'] = 'CPD activity statuses demonstrate progression through a given activity to meet a specific development need. Create activity statuses here to match your internal CPD workflow.';
+
 // Add activity type callout
 $string['addactivitytype']     = 'Add activity type';
 $string['addactivitytypedesc'] = 'Activity types allow you to control the types of activity which count towards CPD.';
@@ -79,13 +86,14 @@ $string['addyear']     = 'Add CPD year';
 $string['addyeardesc'] = 'CPD years are used as a tool to filter recorded CPD activities. New CPD years will need to be periodically added in accordance with your CPD calendar.';
 
 // Confirmation prompts
-$string['confirmdeleteofx'] = 'Are you sure you wish to delete "{$a}"?';
+$string['confirmdeleteofx'] = 'Are you sure you wish to delete \'{$a}\'?';
 
 // Access capabilities
-$string['cpd:edituserreport']      = 'Edit a user\'s CPD report';
-$string['cpd:manageactivitytypes'] = 'Manage activity types';
-$string['cpd:manageyears']         = 'Manage CPD years';
-$string['cpd:viewuserreport']      = 'View a user\'s CPD report';
+$string['cpd:edituserreport']         = 'Edit a user\'s CPD report';
+$string['cpd:manageactivitytypes']    = 'Manage activity types';
+$string['cpd:manageactivitystatuses'] = 'Manage activity statuses';
+$string['cpd:manageyears']            = 'Manage CPD years';
+$string['cpd:viewuserreport']         = 'View a user\'s CPD report';
 
 // Model exceptions
 $string['model:incompleteimplementation'] = 'Attempt to use model \'{$a}\' which is incomplete';
@@ -101,6 +109,14 @@ $string['event:activitydeleted']     = 'CPD activity deleted';
 $string['event:activitydeleteddesc'] = 'The user with ID \'{$a->userid}\' deleted the CPD activity with ID \'{$a->objectid}\' for subject with ID \'{$a->relateduserid}\'';
 $string['event:activityupdated']     = 'CPD activity updated';
 $string['event:activityupdateddesc'] = 'The user with ID \'{$a->userid}\' updated the CPD activity with ID \'{$a->objectid}\' for subject with ID \'{$a->relateduserid}\'';
+
+// CPD activity status events
+$string['event:activitystatuscreated']     = 'CPD activity status created';
+$string['event:activitystatuscreateddesc'] = 'The user with ID \'{$a->userid}\' created a CPD activity status with ID \'{$a->objectid}\'';
+$string['event:activitystatusdeleted']     = 'CPD activity status deleted';
+$string['event:activitystatusdeleteddesc'] = 'The user with ID \'{$a->userid}\' deleted the CPD activity status with ID \'{$a->objectid}\'';
+$string['event:activitystatusupdated']     = 'CPD activity status updated';
+$string['event:activitystatusupdateddesc'] = 'The user with ID \'{$a->userid}\' updated the CPD activity status with ID \'{$a->objectid}\'';
 
 // CPD activity type events
 $string['event:activitytypecreated']     = 'CPD activity type created';

@@ -97,6 +97,18 @@ class url_generator {
     }
 
     /**
+     * Get status deletion URL.
+     *
+     * @param integer $statusid The ID of the status to delete.
+     * @param string  $sesskey  The session key/nonce, for CSRF prevention.
+     *
+     * @return \moodle_url The status deletion URL.
+     */
+    public static function delete_activity_status($statusid=null, $sesskey=null) {
+        return static::delete('/deleteactivitystatus.php', $statusid, $sesskey);
+    }
+
+    /**
      * Get year deletion URL.
      *
      * @param integer $yearid  The ID of the year to delete.
@@ -144,6 +156,17 @@ class url_generator {
     }
 
     /**
+     * Get status edit URL.
+     *
+     * @param integer $statusid The ID of the status to edit.
+     *
+     * @return \moodle_url The status edit URL.
+     */
+    public static function edit_activity_status($statusid=null) {
+        return static::edit('/editactivitystatus.php', $statusid);
+    }
+
+    /**
      * Get year edit URL.
      *
      * @param integer $yearid The ID of the year to edit.
@@ -161,6 +184,15 @@ class url_generator {
      */
     public static function list_activity_type() {
         return new moodle_url(static::CPD_URL . '/manageactivitytypes.php');
+    }
+
+    /**
+     * Get status list URL.
+     *
+     * @return \moodle_url The status list URL.
+     */
+    public static function list_activity_status() {
+        return new moodle_url(static::CPD_URL . '/manageactivitystatuses.php');
     }
 
     /**
