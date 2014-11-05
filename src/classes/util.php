@@ -31,6 +31,7 @@ namespace local_cpd;
 use lang_string;
 use moodle_url;
 use navbar;
+use navigation_node;
 
 defined('MOODLE_INTERNAL') || die;
 
@@ -101,6 +102,11 @@ class util {
                                               array('id' => $user->id)));
             $PAGE->navbar->add(static::string('cpd'),
                                url_generator::index($user->id));
+
+            $PAGE->navigation->extend_for_user($user);
+            $PAGE->navigation->get('myprofile')->collapse = true;
+            $PAGE->navigation->find('local_cpd-my', navigation_node::TYPE_UNKNOWN)->make_inactive();
+            $PAGE->navigation->find("local_cpd-{$user->id}", navigation_node::TYPE_UNKNOWN)->make_active();
         }
 
         switch ($action) {
