@@ -59,6 +59,7 @@ if ($isowncpd) {
 }
 
 $PAGE->set_context($context);
+$PAGE->set_pagelayout('standard');
 $PAGE->set_title($titlestr);
 $PAGE->set_url($listurl);
 

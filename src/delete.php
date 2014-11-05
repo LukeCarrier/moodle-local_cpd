@@ -53,6 +53,7 @@ $listurl   = url_generator::index();
 $titlestr = util::string('deletingx', $activity->activity);
 
 $PAGE->set_context($context);
+$PAGE->set_pagelayout('standard');
 $PAGE->set_title($titlestr);
 $PAGE->set_url($deleteurl);
 
