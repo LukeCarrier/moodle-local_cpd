@@ -45,7 +45,7 @@ function xmldb_local_cpd_upgrade($oldversion) {
             $dbmgr->add_field($table, $field);
         }
 
-        upgrade_plugin_savepoint(true, 2014073100, 'local', 'cpd');
+        local_cpd_xmldb_savepoint(2014073100);
     }
 
     if ($oldversion < 2014100600) {
@@ -56,7 +56,7 @@ function xmldb_local_cpd_upgrade($oldversion) {
                                                'cpd_year', array('id')));
         $dbmgr->drop_field($table, new xmldb_field('cpdyearid'));
 
-        upgrade_plugin_savepoint(true, 2014100600, 'local', 'cpd');
+        local_cpd_xmldb_savepoint(2014100600);
     }
 
     return true;
