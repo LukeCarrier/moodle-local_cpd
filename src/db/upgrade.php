@@ -28,11 +28,25 @@
 
 defined('MOODLE_INTERNAL') || die;
 
+/**
+ * Perform an XMLDB upgrade.
+ *
+ * This function is a manual transcription of changes made to the database
+ * schema.
+ *
+ * @param integer $oldversion The currently installed version of the plugin.
+ *
+ * @return boolean Always true -- we track successful upgrades using upgrade
+ *                 savepoints for finer-grained checkpointing.
+ */
 function xmldb_local_cpd_upgrade($oldversion) {
     global $DB;
     $dbmgr = $DB->get_manager();
 
     if ($oldversion < 2014073100) {
+        /* We switched the activity, development need and objective fields from
+         * ordinary textareas to Moodle editor fields, allowing HTML markup. As
+         * such, we need to add editor fields. */
         $table      = new xmldb_table('cpd');
         $fieldnames = array(
             'activity_fmt',
@@ -49,6 +63,11 @@ function xmldb_local_cpd_upgrade($oldversion) {
     }
 
     if ($oldversion < 2014100600) {
+        /* We considerably changed the CPD year functionality, switching from a
+         * learner-configurable relationship between years and CPD activity
+         * records to independent records with CPD years as a filtering tool. To
+         * reflect this, the CPD year ID field on activities was dropped, as
+         * were dependent indexes. */
         $table = new xmldb_table('cpd');
 
         $dbmgr->drop_key($table, new xmldb_key('cpd_year_fk', XMLDB_KEY_FOREIGN,
