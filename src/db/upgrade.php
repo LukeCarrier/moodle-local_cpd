@@ -79,5 +79,72 @@ function xmldb_local_cpd_upgrade($oldversion) {
         local_cpd_xmldb_savepoint(2014100600);
     }
 
+    if ($oldversion < 2014110700) {
+        /* Whilst Moodle's code style recommends that underscores are avoided in
+         * variable and property names, Kineo neglected to follow this in the
+         * report_cpd module's code. These fields are now being renamed for
+         * consistency with Moodle. */
+        $fields = array(
+            array(
+                'table'     => 'cpd',
+                'oldname'   => 'activity_fmt',
+                'newname'   => 'activityfmt',
+                'type'      => XMLDB_TYPE_INTEGER,
+                'precision' => 10,
+                'notnull'   => XMLDB_NOTNULL,
+                'default'   => null,
+            ),
+            array(
+                'table'     => 'cpd',
+                'oldname'   => 'development_need',
+                'newname'   => 'developmentneed',
+                'type'      => XMLDB_TYPE_TEXT,
+                'precision' => 'big',
+                'notnull'   => null,
+                'default'   => '',
+            ),
+            array(
+                'table'     => 'cpd',
+                'oldname'   => 'development_need_fmt',
+                'newname'   => 'developmentneedfmt',
+                'type'      => XMLDB_TYPE_INTEGER,
+                'precision' => 10,
+                'notnull'   => XMLDB_NOTNULL,
+                'default'   => null,
+            ),
+            array(
+                'table'     => 'cpd',
+                'oldname'   => 'objective_fmt',
+                'newname'   => 'objectivefmt',
+                'type'      => XMLDB_TYPE_INTEGER,
+                'precision' => 10,
+                'notnull'   => XMLDB_NOTNULL,
+                'default'   => null,
+            ),
+
+            array(
+                'table'     => 'cpd_status',
+                'oldname'   => 'display_order',
+                'newname'   => 'sortorder',
+                'type'      => XMLDB_TYPE_INTEGER,
+                'precision' => 10,
+                'notnull'   => null,
+                'default'   => 0,
+            ),
+        );
+
+        foreach ($fields as $fieldinfo) {
+            $table    = new xmldb_table($fieldinfo['table']);
+            $oldfield = new xmldb_field($fieldinfo['oldname'],
+                                        $fieldinfo['type'], $fieldinfo['precision'],
+                                        null,
+                                        $fieldinfo['notnull'], $fieldinfo['default']);
+
+            $dbmgr->rename_field($table, $oldfield, $fieldinfo['newname']);
+        }
+
+        local_cpd_xmldb_savepoint(2014110700);
+    }
+
     return true;
 }
