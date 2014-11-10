@@ -58,17 +58,6 @@ if ($CFG->release < 2013111800) {
 }
 
 /**
- * Mark an upgrade savepoint.
- *
- * @param integer $version The current database version.
- *
- * @return void
- */
-function local_cpd_xmldb_savepoint($version) {
-    upgrade_plugin_savepoint(true, $version, 'local', 'cpd');
-}
-
-/**
  * Extend the site navigation
  *
  * @return void
