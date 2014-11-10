@@ -271,7 +271,7 @@ class activity extends base_model {
 
         foreach (static::$editorfields as $field) {
             $formdata->{$field} = array(
-                'format' => $this->{"{$field}_fmt"},
+                'format' => $this->{"{$field}fmt"},
                 'text'   => $this->{$field},
             );
         }
