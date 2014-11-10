@@ -28,6 +28,8 @@
 
 defined('MOODLE_INTERNAL') || die;
 
+require_once dirname(__DIR__) . '/upgradelib.php';
+
 /**
  * Perform an XMLDB upgrade.
  *
