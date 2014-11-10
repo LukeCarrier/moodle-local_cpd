@@ -46,7 +46,7 @@ class activity extends base_model {
      */
     protected static $editorfields = array(
         'activity',
-        'development_need',
+        'developmentneed',
         'objective',
     );
 
@@ -76,21 +76,21 @@ class activity extends base_model {
      *
      * @var integer
      */
-    protected $objective_fmt;
+    protected $objectivefmt;
 
     /**
      * Identified development need.
      *
      * @var string
      */
-    protected $development_need;
+    protected $developmentneed;
 
     /**
      * Identified development need format.
      *
      * @var integer
      */
-    protected $development_need_fmt;
+    protected $developmentneedfmt;
 
     /**
      * Activity type ID.
@@ -111,7 +111,7 @@ class activity extends base_model {
      *
      * @var integer
      */
-    protected $activity_fmt;
+    protected $activityfmt;
 
     /**
      * Due date (timestamp).
@@ -153,30 +153,30 @@ class activity extends base_model {
      *
      * @param integer $userid
      * @param string  $objective
-     * @param integer $objective_fmt
-     * @param string  $development_need
-     * @param integer $development_need_fmt
+     * @param integer $objectivefmt
+     * @param string  $developmentneed
+     * @param integer $developmentneedfmt
      * @param integer $activitytypeid
      * @param string  $activity
-     * @param integer $activity_fmt
+     * @param integer $activityfmt
      * @param integer $duedate
      * @param integer $enddate
      * @param integer $statusid
      * @param integer $timetaken
      */
     final public function __construct($userid=null, $objective=null,
-            $objective_fmt=null, $development_need=null,
-            $development_need_fmt=null, $activitytypeid=null, $activity=null,
+            $objectivefmt=null, $developmentneed=null,
+            $developmentneedfmt=null, $activitytypeid=null, $activity=null,
             $activity_format=null, $duedate=null, $startdate=null,
             $enddate=null, $statusid=null, $timetaken=null) {
         $this->userid               = $userid;
         $this->objective            = $objective;
-        $this->objective_fmt        = $objective_fmt;
-        $this->development_need     = $development_need;
-        $this->development_need_fmt = $development_need_fmt;
+        $this->objectivefmt        = $objectivefmt;
+        $this->developmentneed     = $developmentneed;
+        $this->developmentneedfmt = $developmentneedfmt;
         $this->activitytypeid       = $activitytypeid;
         $this->activity             = $activity;
-        $this->activity_fmt         = $activity_format;
+        $this->activityfmt         = $activity_format;
         $this->duedate              = $duedate;
         $this->startdate            = $startdate;
         $this->enddate              = $enddate;
@@ -190,7 +190,7 @@ class activity extends base_model {
      * @return string The formatted activity name.
      */
     public function get_activity_text() {
-        return format_text($this->activity, $this->activity_fmt);
+        return format_text($this->activity, $this->activityfmt);
     }
 
     /**
@@ -198,8 +198,8 @@ class activity extends base_model {
      *
      * @return string The formatted development need.
      */
-    public function get_development_need_text() {
-        return format_text($this->development_need, $this->development_need_fmt);
+    public function get_developmentneed_text() {
+        return format_text($this->developmentneed, $this->developmentneedfmt);
     }
 
     /**
@@ -208,7 +208,7 @@ class activity extends base_model {
      * @return string The formatted objective.
      */
     public function get_objective_text() {
-        return format_text($this->objective, $this->objective_fmt);
+        return format_text($this->objective, $this->objectivefmt);
     }
 
     /**
@@ -255,8 +255,8 @@ class activity extends base_model {
     final public static function model_from_form($data) {
         return new static($data->userid, $data->objective['text'],
                           $data->objective['format'],
-                          $data->development_need['text'],
-                          $data->development_need['format'],
+                          $data->developmentneed['text'],
+                          $data->developmentneed['format'],
                           $data->activitytypeid, $data->activity['text'],
                           $data->activity['format'], $data->duedate,
                           $data->startdate, $data->enddate,
@@ -291,12 +291,12 @@ class activity extends base_model {
             'id',
             'userid',
             'objective',
-            'objective_fmt',
-            'development_need',
-            'development_need_fmt',
+            'objectivefmt',
+            'developmentneed',
+            'developmentneedfmt',
             'activitytypeid',
             'activity',
-            'activity_fmt',
+            'activityfmt',
             'duedate',
             'startdate',
             'enddate',

@@ -69,7 +69,7 @@ function xmldb_local_cpd_install() {
     foreach ($statuses as $status) {
         $DB->insert_record('cpd_status', (object) array(
             'name'          => $status[0],
-            'display_order' => $status[1],
+            'sortorder' => $status[1],
         ));
     }
 

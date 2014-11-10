@@ -53,9 +53,9 @@ class activity_form extends moodleform {
         $mform->addElement('date_selector', 'duedate', util::string('datedue'));
         $mform->setType('duedate', PARAM_INT);
 
-        $mform->addElement('editor', 'development_need',
+        $mform->addElement('editor', 'developmentneed',
                            util::string('developmentneed'));
-        $mform->setType('development_need', PARAM_TEXT);
+        $mform->setType('developmentneed', PARAM_TEXT);
 
         $mform->addElement('select', 'activitytypeid',
                            util::string('activitytype'), activity_type::menu());

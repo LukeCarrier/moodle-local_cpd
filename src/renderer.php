@@ -131,7 +131,7 @@ class local_cpd_renderer extends plugin_renderer_base {
 
             $table->data[] = array(
                 $activity->objective,
-                $activity->development_need,
+                $activity->developmentneed,
                 $activitytype->name,
                 $activity->activity,
                 userdate($activity->duedate,   util::string('strftimedate', null, 'langconfig')),

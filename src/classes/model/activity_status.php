@@ -55,17 +55,17 @@ class activity_status extends base_model {
      *
      * @var integer
      */
-    protected $display_order;
+    protected $sortorder;
 
     /**
      * Initialiser.
      *
      * @param string  $name          Name.
-     * @param integer $display_order Display order.
+     * @param integer $sortorder Display order.
      */
-    final public function __construct($name=null, $display_order=null) {
+    final public function __construct($name=null, $sortorder=null) {
         $this->name          = $name;
-        $this->display_order = $display_order;
+        $this->sortorder = $sortorder;
     }
 
     /**
@@ -74,7 +74,7 @@ class activity_status extends base_model {
      * @return string[]
      */
     final public static function menu() {
-        $activitystatuses = static::all('display_order');
+        $activitystatuses = static::all('sortorder');
         $menu             = array();
 
         foreach ($activitystatuses as $activitystatus) {
@@ -98,7 +98,7 @@ class activity_status extends base_model {
         return array(
             'id',
             'name',
-            'display_order',
+            'sortorder',
         );
     }
 
