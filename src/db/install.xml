@@ -16,33 +16,33 @@
         <TABLE NAME="cpd" COMMENT="Defines CPD activities">
             <FIELDS>
                 <FIELD NAME="id" TYPE="int" LENGTH="10"
-                       NOTNULL="true" UNSIGNED="true" SEQUENCE="true" />
+                       NOTNULL="true" SEQUENCE="true" />
                 <FIELD NAME="userid" TYPE="int" LENGTH="10"
-                       NOTNULL="true" UNSIGNED="true" SEQUENCE="false" />
+                       NOTNULL="true" SEQUENCE="false" />
                 <FIELD NAME="objective" TYPE="text" LENGTH="big"
                        NOTNULL="false" SEQUENCE="false" />
                 <FIELD NAME="objective_fmt" TYPE="int" LENGTH="10"
-                       NOTNULL="true" UNSIGNED="true" SEQUENCE="false" />
+                       NOTNULL="true" SEQUENCE="false" />
                 <FIELD NAME="development_need" TYPE="text" LENGTH="big"
                        NOTNULL="false" SEQUENCE="false" />
                 <FIELD NAME="development_need_fmt" TYPE="int" LENGTH="10"
-                       NOTNULL="true" UNSIGNED="true" SEQUENCE="false" />
+                       NOTNULL="true" SEQUENCE="false" />
                 <FIELD NAME="activitytypeid" TYPE="int" LENGTH="10"
-                       NOTNULL="false" UNSIGNED="true" SEQUENCE="false" />
+                       NOTNULL="false" SEQUENCE="false" />
                 <FIELD NAME="activity" TYPE="text" LENGTH="big"
                        NOTNULL="false" SEQUENCE="false" />
                 <FIELD NAME="activity_fmt" TYPE="int" LENGTH="10"
-                       NOTNULL="true" UNSIGNED="true" SEQUENCE="false" />
+                       NOTNULL="true" SEQUENCE="false" />
                 <FIELD NAME="duedate" TYPE="int" LENGTH="10"
-                       NOTNULL="false" UNSIGNED="true" SEQUENCE="false" />
+                       NOTNULL="false" SEQUENCE="false" />
                 <FIELD NAME="startdate" TYPE="int" LENGTH="10"
-                       NOTNULL="false" UNSIGNED="true" SEQUENCE="false" />
+                       NOTNULL="false" SEQUENCE="false" />
                 <FIELD NAME="enddate" TYPE="int" LENGTH="10"
-                       NOTNULL="false" UNSIGNED="true" SEQUENCE="false" />
+                       NOTNULL="false" SEQUENCE="false" />
                 <FIELD NAME="statusid" TYPE="int" LENGTH="10"
-                       NOTNULL="false" UNSIGNED="true" SEQUENCE="false" />
+                       NOTNULL="false" SEQUENCE="false" />
                 <FIELD NAME="timetaken" TYPE="int" LENGTH="10"
-                       NOTNULL="false" UNSIGNED="true" SEQUENCE="false" />
+                       NOTNULL="false" SEQUENCE="false" />
             </FIELDS>
             <KEYS>
                 <KEY NAME="primary" TYPE="primary" FIELDS="id" />
@@ -57,7 +57,7 @@
         <TABLE NAME="cpd_activity_type" COMMENT="Defines the activity types">
             <FIELDS>
                 <FIELD NAME="id" TYPE="int" LENGTH="10"
-                       NOTNULL="true" UNSIGNED="true" SEQUENCE="true" />
+                       NOTNULL="true" SEQUENCE="true" />
                 <FIELD NAME="name" TYPE="char" LENGTH="255"
                        NOTNULL="true" SEQUENCE="false" />
             </FIELDS>
@@ -68,11 +68,11 @@
         <TABLE NAME="cpd_status" COMMENT="Defines the statuses">
             <FIELDS>
                 <FIELD NAME="id" TYPE="int" LENGTH="10"
-                       NOTNULL="true" UNSIGNED="true" SEQUENCE="true" />
+                       NOTNULL="true" SEQUENCE="true" />
                 <FIELD NAME="name" TYPE="char" LENGTH="255"
                        NOTNULL="true" SEQUENCE="false" />
                 <FIELD NAME="display_order" TYPE="int" LENGTH="10"
-                       NOTNULL="false" UNSIGNED="true" SEQUENCE="false"
+                       NOTNULL="false" SEQUENCE="false"
                        DEFAULT="0" />
             </FIELDS>
             <KEYS>
@@ -83,11 +83,11 @@
         <TABLE NAME="cpd_year" COMMENT="Defines the periods to view CPD data">
             <FIELDS>
                 <FIELD NAME="id" TYPE="int" LENGTH="10"
-                       NOTNULL="true" UNSIGNED="true" SEQUENCE="true" />
+                       NOTNULL="true" SEQUENCE="true" />
                 <FIELD NAME="startdate" TYPE="int" LENGTH="10"
-                       NOTNULL="true" UNSIGNED="true" SEQUENCE="false" />
+                       NOTNULL="true" SEQUENCE="false" />
                 <FIELD NAME="enddate" TYPE="int" LENGTH="10"
-                       NOTNULL="true" UNSIGNED="true" SEQUENCE="false" />
+                       NOTNULL="true" SEQUENCE="false" />
             </FIELDS>
             <KEYS>
                 <KEY NAME="primary" TYPE="primary" FIELDS="id"/>

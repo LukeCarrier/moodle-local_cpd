@@ -54,8 +54,7 @@ function xmldb_local_cpd_upgrade($oldversion) {
             'objective_fmt',
         );
         foreach ($fieldnames as $fieldname) {
-            $field = new xmldb_field($fieldname, XMLDB_TYPE_INTEGER, 10,
-                                     XMLDB_UNSIGNED);
+            $field = new xmldb_field($fieldname, XMLDB_TYPE_INTEGER, 10);
             $dbmgr->add_field($table, $field);
         }
 
