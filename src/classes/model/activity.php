@@ -169,19 +169,19 @@ class activity extends base_model {
             $developmentneedfmt=null, $activitytypeid=null, $activity=null,
             $activityfmt=null, $duedate=null, $startdate=null,
             $enddate=null, $statusid=null, $timetaken=null) {
-        $this->userid               = $userid;
-        $this->objective            = $objective;
-        $this->objectivefmt        = $objectivefmt;
-        $this->developmentneed     = $developmentneed;
+        $this->userid             = $userid;
+        $this->objective          = $objective;
+        $this->objectivefmt       = $objectivefmt;
+        $this->developmentneed    = $developmentneed;
         $this->developmentneedfmt = $developmentneedfmt;
-        $this->activitytypeid       = $activitytypeid;
-        $this->activity             = $activity;
-        $this->duedate              = $duedate;
-        $this->startdate            = $startdate;
-        $this->enddate              = $enddate;
-        $this->statusid             = $statusid;
-        $this->timetaken            = $timetaken;
+        $this->activitytypeid     = $activitytypeid;
+        $this->activity           = $activity;
         $this->activityfmt         = $activityfmt;
+        $this->duedate            = $duedate;
+        $this->startdate          = $startdate;
+        $this->enddate            = $enddate;
+        $this->statusid           = $statusid;
+        $this->timetaken          = $timetaken;
     }
 
     /**

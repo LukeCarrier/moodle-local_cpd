@@ -60,11 +60,11 @@ class activity_status extends base_model {
     /**
      * Initialiser.
      *
-     * @param string  $name          Name.
+     * @param string  $name      Name.
      * @param integer $sortorder Display order.
      */
     final public function __construct($name=null, $sortorder=null) {
-        $this->name          = $name;
+        $this->name      = $name;
         $this->sortorder = $sortorder;
     }
 
