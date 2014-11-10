@@ -167,7 +167,7 @@ class activity extends base_model {
     final public function __construct($userid=null, $objective=null,
             $objectivefmt=null, $developmentneed=null,
             $developmentneedfmt=null, $activitytypeid=null, $activity=null,
-            $activity_format=null, $duedate=null, $startdate=null,
+            $activityfmt=null, $duedate=null, $startdate=null,
             $enddate=null, $statusid=null, $timetaken=null) {
         $this->userid               = $userid;
         $this->objective            = $objective;
@@ -176,12 +176,12 @@ class activity extends base_model {
         $this->developmentneedfmt = $developmentneedfmt;
         $this->activitytypeid       = $activitytypeid;
         $this->activity             = $activity;
-        $this->activityfmt         = $activity_format;
         $this->duedate              = $duedate;
         $this->startdate            = $startdate;
         $this->enddate              = $enddate;
         $this->statusid             = $statusid;
         $this->timetaken            = $timetaken;
+        $this->activityfmt         = $activityfmt;
     }
 
     /**
