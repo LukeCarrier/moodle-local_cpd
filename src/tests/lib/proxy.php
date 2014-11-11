@@ -39,12 +39,12 @@
  */
 class local_cpd_proxy {
     /**
-     * Generator class name.
+     * Name of the proxied class or a callable to instantiate it.
      *
-     * @var string
+     * @var callable|string
      */
-    protected $classname;
-    
+    protected $classnameorcallable;
+
     /**
      * Generator filename.
      *
@@ -62,9 +62,9 @@ class local_cpd_proxy {
     /**
      * Initialiser.
      */
-    public function __construct($classname, $filename) {
-        $this->classname = '';
-        $this->filename  = __DIR__ . '/lib.php';
+    public function __construct($classnameorcallable, $filename) {
+        $this->classnameorcallable = $classnameorcallable;
+        $this->filename            = $filename;
     }
 
     /**
@@ -88,7 +88,12 @@ class local_cpd_proxy {
     protected function get_proxied_instance() {
         if ($this->instance === null) {
             require_once $this->filename;
-            $this->instance = new $this->classname();
+
+            if (is_callable($this->classnameorcallable)) {
+                $this->instance = call_user_func($this->classnameorcallable);
+            } else {
+                $this->instance = new $this->classnameorcallable();
+            }
         }
 
         return $this->instance;
