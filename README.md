@@ -44,3 +44,18 @@ Building
 1. Clone this repository, and ````cd```` into it
 2. Execute ````make```` to generate a zip file containing the plugin
 3. Upload to the ````moodle.org```` plugins site
+
+Testing
+-------
+
+Assuming you have already configured your local Moodle installation for testing
+with Behat and have launched a Selenium server, the following commands will
+execute the acceptance tests:
+
+    $ php admin/tool/behat/cli/util.php --enable
+    $ vendor/bin/behat -c ../{$CFG->dataroot}/behat/behat.yml --tags @local_cpd
+
+Changes to the CPD module's code is also monitored by Scrutinizr, which passes a
+wide array of static analysis tools over our code. The results of these
+inspections are made
+[publicly available](https://scrutinizer-ci.com/g/LukeCarrier/moodle-local_cpd).
