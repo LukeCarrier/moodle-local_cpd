@@ -61,6 +61,12 @@ class local_cpd_proxy {
 
     /**
      * Initialiser.
+     *
+     * @param callable|string $classnameorcallable The name of the class to be
+     *                                             proxied or a callable to
+     *                                             instantiate it.
+     * @param string          $filename            The path to the file
+     *                                             containing the class.
      */
     public function __construct($classnameorcallable, $filename) {
         $this->classnameorcallable = $classnameorcallable;
