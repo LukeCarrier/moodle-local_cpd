@@ -43,3 +43,15 @@ Feature: Manage own CPD records
       | id_timetaken_number | 6        |
     And I click on "Save changes" "button"
     Then I should see "Develop Behat testing skill"
+
+  @javascript
+  Scenario: Delete own CPD record
+    Given the following "users" exist:
+      | username | firstname | lastname | email         |
+      | user1    | User      | 1        | user1@asd.com |
+    And the following local_cpd "activities" exist:
+      | User  | Objective                   | Development Need           | Activity Type       | Activity Description               | Status  | Due Date   | Start Date | End Date   | Time Taken |
+      | user1 | Develop Behat testing skill | Understand data generators | On-the-job training | Trial, error and lots of debugging | Started | 01/10/2015 | 30/10/2014 | 01/12/2014 | 1800       |
+    And I log in as "user1"
+    And I am on homepage
+    And I navigate to "My CPD" node in "My profile"
