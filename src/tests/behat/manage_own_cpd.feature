@@ -21,6 +21,7 @@ Feature: Manage own CPD records
       | username | firstname | lastname | email         |
       | user1    | User      | 1        | user1@asd.com |
     And I log in as "user1"
+    And I am on homepage
     And I navigate to "My CPD" node in "My profile"
     And I click on "Log CPD activity" "button"
     And I set the following fields to these values:
