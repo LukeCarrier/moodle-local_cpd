@@ -63,6 +63,8 @@ class local_cpd_generator extends component_generator_base {
         'activity_type'   => array(
         ),
         'year'            => array(
+            'Start Date' => 'startdate',
+            'End Date'   => 'enddate',
         ),
     );
 
@@ -134,6 +136,30 @@ class local_cpd_generator extends component_generator_base {
     public function create_activity_status($options=null) {
     }
 
+    /**
+     * Create a CPD year.
+     *
+     * @param mixed[] $options Raw row data from a Gherkin TableNode.
+     *
+     * @return void
+     */
     public function create_year($options=null) {
+        global $DB;
+
+        $record = new stdClass();
+
+        foreach ($options as $label => $value) {
+            $field = static::$fields['activity'][$label];
+
+            switch ($field) {
+                case 'startdate':
+                case 'enddate':
+                    $value = strtotime($value);
+            }
+
+            $record->{$field} = $value;
+        }
+
+        $DB->insert_record(static::$tables['year'], $record);
     }
 }
