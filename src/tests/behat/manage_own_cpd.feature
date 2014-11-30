@@ -65,3 +65,6 @@ Feature: Manage own CPD records
     And I log in as "user1"
     And I am on homepage
     And I navigate to "My CPD" node in "My profile"
+    And I click on "a[title=Delete]" "css_element" in the "Develop Behat testing skill" "table_row"
+    And I click on "Continue" "button"
+    Then I should not see "Develop Behat testing skill"
