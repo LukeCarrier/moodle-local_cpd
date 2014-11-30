@@ -73,7 +73,7 @@ class local_cpd_renderer extends plugin_renderer_base {
      * @param string  $editurl   The URL to link edit buttons to.
      * @param string  $deleteurl The URL to link delete buttons to.
      *
-     * @return mixed[] An array containing three numerically-indexed values:
+     * @return mixed[] A numerically-indexed array containing three values:
      *                 [0] => html_table  $table
      *                 [1] => action_link $deletelink
      *                 [2] => action_link $editlink
@@ -83,9 +83,11 @@ class local_cpd_renderer extends plugin_renderer_base {
         $table->head = $head;
 
         $deleteicon = new pix_icon('t/delete', new lang_string('delete'));
-        $deletelink = new action_link($deleteurl, $deleteicon);
+        $deletelink = new action_link($deleteurl, $deleteicon, null,
+                                      array('title' => new lang_string('delete')));
         $editicon   = new pix_icon('t/edit', new lang_string('edit'));
-        $editlink   = new action_link($editurl, $editicon);
+        $editlink   = new action_link($editurl, $editicon, null,
+                                      array('title' => new lang_string('edit')));
 
         return array($table, $deletelink, $editlink);
     }
