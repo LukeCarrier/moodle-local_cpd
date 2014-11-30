@@ -16,6 +16,16 @@ Feature: Manage own CPD records
   I need to create and manage my CPD records
 
   @javascript
+  Scenario: View existing CPD records
+    Given the following "users" exist:
+      | username | firstname | lastname | email             |
+      | user1    | User      | 1        | user1@example.com |
+    And I log in as "user1"
+    And I am on homepage
+    And I navigate to "My CPD" node in "My profile"
+    Then I should see "Please ensure your CPD activity log is up to date by logging your CPD activities"
+
+  @javascript
   Scenario: Create own CPD record
     Given the following "users" exist:
       | username | firstname | lastname | email         |
