@@ -32,19 +32,11 @@ use Behat\Gherkin\Node\TableNode;
 // MOODLE_INTERNAL check omitted for Behat
 
 require_once dirname(dirname(dirname(dirname(__DIR__)))) . '/lib/behat/behat_base.php';
-require_once dirname(__DIR__) . '/lib/proxy.php';
 
 /**
  * Behat steps for the CPD plugin.
  */
 class behat_local_cpd extends behat_base {
-    /**
-     * Data generator.
-     *
-     * @var \local_cpd_generator_proxy
-     */
-    protected $datagenerator;
-
     /**
      * Map of friendly names to internal names.
      *
@@ -56,16 +48,7 @@ class behat_local_cpd extends behat_base {
         'activity types'    => 'activity_type',
         'years'             => 'year',
     );
- 
-    /**
-     * Initialiser.
-     */
-    public function __construct() {
-        $this->datagenerator = new local_cpd_proxy(function() {
-            return new local_cpd_generator(new testing_data_generator());
-        }, dirname(__DIR__) . '/generator/lib.php');
-    }
- 
+
     /**
      * Create the specified elements.
      *
@@ -80,7 +63,10 @@ class behat_local_cpd extends behat_base {
         $data           = $table->getHash();
         $machineelement = static::$elements[$element];
 
-        $method = array($this->datagenerator, "create_{$machineelement}");
+        $generator       = behat_util::get_data_generator();
+        $plugingenerator = $generator->get_plugin_generator('local_cpd');
+
+        $method = array($plugingenerator, "create_{$machineelement}");
 
         if (!is_callable($method)) {
             throw new PendingException();

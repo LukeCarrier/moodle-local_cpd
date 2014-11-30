@@ -28,6 +28,10 @@
 
 defined('MOODLE_INTERNAL') || die;
 
+global $CFG;
+
+require_once "{$CFG->dirroot}/lib/testing/generator/component_generator_base.php";
+
 /**
  * Behat data generator.
  *
@@ -84,7 +88,7 @@ class local_cpd_generator extends component_generator_base {
     public function create_activity($options=null) {
         global $DB;
 
-        $record = new stdClass;
+        $record = new stdClass();
 
         foreach ($options as $label => $value) {
             $field = static::$fields['activity'][$label];
