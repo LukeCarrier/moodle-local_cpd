@@ -27,6 +27,8 @@
  */
 
 use local_cpd\report_builder\abstract_source;
+use local_cpd\model\activity_status;
+use local_cpd\model\activity_type;
 use local_cpd\util;
 
 defined('MOODLE_INTERNAL') || die;
@@ -181,7 +183,29 @@ class rb_source_local_cpd_activity extends abstract_source {
      * @override \rb_base_source
      */
     protected function define_filteroptions() {
-        $filteroptions = array();
+        $filteroptions = array(
+            new rb_filter_option(
+                'local_cpd_activity', 'activitytype',
+                util::string('activitytype'),
+                'select',
+                array(
+                    'attributes' => rb_filter_option::select_width_limiter(),
+                    'selectfunc' => 'cpd_activity_type_list',
+                ),
+                'base.activitytypeid'
+            ),
+
+            new rb_filter_option(
+                'local_cpd_activity', 'activitystatus',
+                util::string('activitystatus'),
+                'select',
+                array(
+                    'attributes' => rb_filter_option::select_width_limiter(),
+                    'selectfunc' => 'cpd_activity_status_list',
+                ),
+                'base.statusid'
+            ),
+        );
 
         $this->add_manager_fields_to_filters($filteroptions);
         $this->add_position_fields_to_filters($filteroptions);
@@ -275,11 +299,29 @@ class rb_source_local_cpd_activity extends abstract_source {
     public function define_defaultfilters() {
         $defaultfilters = array(
             array(
-                'type' => 'user',
+                'type'  => 'user',
                 'value' => 'fullname',
             ),
         );
 
         return $defaultfilters;
+    }
+
+    /**
+     * Get a list of CPD activity statuses.
+     *
+     * @return string[] An ID-indexed array of CPD activity status names.
+     */
+    public function rb_filter_cpd_activity_status_list() {
+        return activity_status::menu();
+    }
+
+    /**
+     * Get a list of CPD activity types.
+     *
+     * @return string[] An ID-indexed array of CPD activity type names.
+     */
+    public function rb_filter_cpd_activity_type_list() {
+        return activity_type::menu();
     }
 }
